@@ -9,7 +9,7 @@ using System.Text.RegularExpressions;
 
 namespace PackDevNET
 {
-    internal class Pack
+    public class Pack
     {
         private List<Cup> _cups;
         private bool _flags;
@@ -99,15 +99,34 @@ namespace PackDevNET
         }
 
         // returns the name of the pack formatted for the files
-        private string FormatName()
+        public string FormatName()
         {
             return Regex.Replace(_name, @"\s+", "");
+        }
+
+        // Calls a wiimms tool command
+        private void WiimmCommand(string tool, string args)
+        {
+            string workingDir = AppDomain.CurrentDomain.BaseDirectory;
+
+            string WITPath = Path.Combine(workingDir, "Wiimm", $"{tool}.exe");
+            Process wit = new Process();
+            wit.StartInfo.FileName = WITPath;
+            wit.StartInfo.Arguments = args;
+
+            wit.StartInfo.RedirectStandardOutput = true;
+            wit.StartInfo.RedirectStandardError = true;
+            wit.StartInfo.UseShellExecute = false;
+            wit.StartInfo.CreateNoWindow = true;
+
+            wit.Start();
+            wit.WaitForExit();
         }
 
         // Get the ID of an MKW Image file
         //
         // path: path to image file
-        private string GetImageID(string path)
+        public string GetImageID(string path)
         {
             StringBuilder sb = new StringBuilder();
 
@@ -124,20 +143,16 @@ namespace PackDevNET
         //
         // path:    path to image file
         // output:  path to extracted image folder
-        private void ExtractImage(string path, string output)
+        public void ExtractImage(string path, string output)
         {
-            string workingDir = AppDomain.CurrentDomain.BaseDirectory;
-
-            string WITPath = Path.Combine(workingDir, "Wiimm", "WIT.exe");
-            Process wit = Process.Start(WITPath, $"X \"{path}\" -q -o -D \"{output}\"");
-            wit.WaitForExit();
+            WiimmCommand("WIT", $"X \"{path}\" -q -o -D \"{output}\"");
         }
 
         // Build the MKW Image file
         //
         // path:    path to the folder containing the extracted image
         // output:  path to new image file
-        private void BuildImage(string path, string output)
+        public void BuildImage(string path, string output)
         {
             string workingDir = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -149,20 +164,16 @@ namespace PackDevNET
         // Patch the main.dol to run le-code
         //
         // path: path to main.dol file
-        private void PatchMainDol(string path)
+        public void PatchMainDol(string path)
         {
-            string workingDir = AppDomain.CurrentDomain.BaseDirectory;
-
-            string WSTRTPath = Path.Combine(workingDir, "Wiimm", "WSTRT.exe");
-            Process wstrt = Process.Start(WSTRTPath, $"patch \"{path}\" --clean-dol --add-lecode -o");
-            wstrt.WaitForExit();
+            WiimmCommand("WSTRT", $"patch \"{path}\" --clean-dol --add-lecode -o");
         }
 
         // Write lecode.bin file
         //
         // image:   path to the image file
         // path:    path to the output folder
-        private string WriteLECODEBin(string image, string path)
+        public string WriteLECODEBin(string image, string path)
         {
             string ID = GetImageID(image);
             if (ID == "RMCE01")
@@ -198,26 +209,23 @@ namespace PackDevNET
         // lecodeBin:   Path to lecode.bin file
         // ctDefTxt:    Path to CT-DEF.txt file
         // directory:   Path to track directory
-        private void PatchTracksToLECODEBin(string lecodeBin, string ctDefTxt, string directory)
+        public void PatchTracksToLECODEBin(string lecodeBin, string ctDefTxt, string directory)
         {
             StringBuilder patchTracksArgs = new StringBuilder();
             patchTracksArgs.Append($"patch \"{lecodeBin}\" --le-define \"{ctDefTxt}\" --track-dir \"");
             patchTracksArgs.Append($"{directory}\" ");
             patchTracksArgs.Append($" --move-tracks \"{directory}\" -o");
 
-            Console.WriteLine(patchTracksArgs.ToString());
- 
-            string workingDir = AppDomain.CurrentDomain.BaseDirectory;
-            string WLECTPath = Path.Combine(workingDir, "Wiimm", "WLECT.exe");
-            Process wlect = Process.Start(WLECTPath, patchTracksArgs.ToString());
-            wlect.WaitForExit();
+            // Console.WriteLine(patchTracksArgs.ToString());
+
+            WiimmCommand("WLECT", patchTracksArgs.ToString());
         }
 
         // Patch the menu files in the given ui folder
         //
         // path:    path to folder containing menu files
         // output:  path to output folder
-        private void PatchMenuFiles(string path, string output)
+        public void PatchMenuFiles(string path, string output)
         {
             string[] files = new string[] {
                 "Award.szs",
@@ -239,9 +247,7 @@ namespace PackDevNET
                 string dynamicDir = Path.Combine(path, Path.GetFileNameWithoutExtension(file) + ".d");
                 string outputFile = Path.Combine(output, file);
 
-                string WSZSTPath = Path.Combine(workingDir, "Wiimm", "WSZST.exe");
-                Process wszst = Process.Start(WSZSTPath, $"X \"{currentPath}\"");
-                wszst.WaitForExit();
+                WiimmCommand("WSZST", $"X \"{currentPath}\"");
 
                 if (File.Exists(Path.Combine(dynamicDir, "button", "blyt", "cup_icon_64x64_common.brlyt")))
                 {
@@ -295,8 +301,7 @@ namespace PackDevNET
                     CreateCupImages(imgOutput1);
                 }
 
-                wszst = Process.Start(WSZSTPath, $"CREATE \"{dynamicDir}\" -D \"{outputFile}\" -o");
-                wszst.WaitForExit();
+                WiimmCommand("WSZST", $"CREATE \"{dynamicDir}\" -D \"{outputFile}\" -o");
 
                 //Directory.Delete(dynamicDir, true);
             }
@@ -307,7 +312,7 @@ namespace PackDevNET
         // path:    path to folder containing menu files
         // ctdef:   path to ctdef text file
         // output:  path to output folder
-        private void CreateBMGFiles(string path, string ctdef, string outputDir)
+        public void CreateBMGFiles(string path, string ctdef, string outputDir)
         {
             string workingDir = AppDomain.CurrentDomain.BaseDirectory;
             foreach (string file in Directory.EnumerateFiles(path, "*.szs"))
@@ -315,11 +320,9 @@ namespace PackDevNET
                 string currentPath = Path.Combine(path, file);
                 string dynamicDir = Path.Combine(path, Path.GetFileNameWithoutExtension(file) + ".d");
                 string outputFile = Path.Combine(outputDir, Path.GetFileName(file));
-                Console.WriteLine(outputFile);
+                // Console.WriteLine(outputFile);
 
-                string WSZSTPath = Path.Combine(workingDir, "Wiimm", "WSZST.exe");
-                Process wszst = Process.Start(WSZSTPath, $"X \"{currentPath}\"");
-                wszst.WaitForExit();
+                WiimmCommand("WSZST", $"X \"{currentPath}\"");
 
                 string commonBmg = Path.Combine(dynamicDir, "message", "Common.bmg");
                 if (File.Exists(commonBmg))
@@ -330,6 +333,7 @@ namespace PackDevNET
                     wctct.StartInfo.Arguments = $"--lecode BMG \"{ctdef}\" -X --patch-bmg INSERT=\"{commonBmg}\"";
                     wctct.StartInfo.UseShellExecute = false;
                     wctct.StartInfo.RedirectStandardOutput = true;
+                    wctct.StartInfo.CreateNoWindow = true;
                     wctct.Start();
 
                     string output = wctct.StandardOutput.ReadToEnd();
@@ -339,12 +343,8 @@ namespace PackDevNET
 
                     wctct.WaitForExit();
 
-                    string WBMGTPath = Path.Combine(workingDir, "Wiimm", "WBMGT.exe");
-                    Process wbmgt = Process.Start(WBMGTPath, $"ENCODE \"{commonBmg}.txt\" -o");
-                    wbmgt.WaitForExit();
-
-                    wszst = Process.Start(WSZSTPath, $"CREATE \"{dynamicDir}\" -D \"{outputFile}\" -o");
-                    wszst.WaitForExit();
+                    WiimmCommand("WBMGT", $"ENCODE \"{commonBmg}.txt\" -o");
+                    WiimmCommand("WSZST", $"CREATE \"{dynamicDir}\" -D \"{outputFile}\" -o");
                 }
 
                 //Directory.Delete(dynamicDir, true);
@@ -358,7 +358,7 @@ namespace PackDevNET
         // ui:      path to ui folder
         // id:      image file id
         // lecode:  lecode file name
-        private void WriteRiivXML(string path, string courses, string ui, string lecode, string id)
+        public void WriteRiivXML(string path, string courses, string ui, string lecode, string id)
         {
             XmlTextWriter writer = new XmlTextWriter(path, Encoding.UTF8);
             writer.Formatting = Formatting.Indented;
@@ -463,7 +463,7 @@ namespace PackDevNET
         // Create cup image tpl file
         //
         // path: path to image output as a .tpl
-        private void CreateCupImages(string path)
+        public void CreateCupImages(string path)
         {
             Image outputImage = _ninTrackMode <= 1 ? Properties.Resources.ct_icons_none : Properties.Resources.ct_icons;
 
@@ -494,10 +494,7 @@ namespace PackDevNET
             string pngOut = Path.Combine(Path.GetDirectoryName(path), Path.GetFileNameWithoutExtension(path) + ".png");
             outputImage.Save(pngOut);
 
-            string workingDir = AppDomain.CurrentDomain.BaseDirectory;
-            string WIMGTPath = Path.Combine(workingDir, "Wiimm", "WIMGT.exe");
-            Process wimgt = Process.Start(WIMGTPath, $"copy \"{pngOut}\" \"{path}\" -x=cmpr -o");
-            wimgt.WaitForExit();
+            WiimmCommand("WIMGT", $"copy \"{pngOut}\" \"{path}\" -x=cmpr -o");
 
             File.Delete(pngOut);
         }
@@ -505,7 +502,7 @@ namespace PackDevNET
         // Patches the le-code config file
         //
         // path: path to le-code config file
-        private void PatchLECODEConfig(string path)
+        public void PatchLECODEConfig(string path)
         {
             StringBuilder argument = new StringBuilder();
             argument.Append($"patch \"{path}\" -o ");
@@ -513,10 +510,7 @@ namespace PackDevNET
             argument.Append($"--perf-mon={(_perfMon ? "FORCE" : "OFF")} ");
             argument.Append($"--custom-tt={(_ctTimeTrial ? "ON" : "OFF")}");
 
-            string workingDir = AppDomain.CurrentDomain.BaseDirectory;
-            string WLECTPath = Path.Combine(workingDir, "Wiimm", "WLECT.exe");
-            Process wlect = Process.Start(WLECTPath, argument.ToString());
-            wlect.WaitForExit();
+            WiimmCommand("WLECT", argument.ToString());
 
         }
 
@@ -625,115 +619,7 @@ namespace PackDevNET
             return false;
         }
 
-        // Exports as riivolution pack
-        //
-        // path:    output directory
-        // image:   path to image file
-        public void ExportRiiv(string path, string image)
-        {
-            // Extract image file
-            //--------------------
-            string packdevWorkingDir = Path.Combine(path, "packdev-working-dir");
-            Console.WriteLine(packdevWorkingDir);
-            ExtractImage(image, packdevWorkingDir);
 
-
-
-            // Create main directories
-            //-------------------------
-            string sdRoot = Path.Combine(path, "riiv-sd");
-            Directory.CreateDirectory(sdRoot);
-
-            string patchDir = Path.Combine(sdRoot, FormatName());
-            Directory.CreateDirectory(patchDir);
-
-            string riivDir = Path.Combine(sdRoot, "riivolution");
-            Directory.CreateDirectory(riivDir);
-
-
-
-            // Save CT-DEF.txt and create cup images
-            //---------------------------------------
-            string ctdef = _ctDef.Save(patchDir);
-
-
-
-            // Create Scene/UI
-            //-----------------
-            string sceneDir = Path.Combine(patchDir, "Scene");
-            Directory.CreateDirectory(sceneDir);
-
-            string uiDir = Path.Combine(sceneDir, "UI");
-            Directory.CreateDirectory(uiDir);
-
-            // Patch menu files
-            string originalUIDir = Path.Combine(packdevWorkingDir, "files", "Scene", "UI");
-            PatchMenuFiles(originalUIDir, uiDir);
-
-            // Create and patch BMG files
-            CreateBMGFiles(originalUIDir, ctdef, uiDir);
-
-
-
-            // Create rel directory
-            //----------------------
-            string relDir = Path.Combine(patchDir, "rel");
-            Directory.CreateDirectory(relDir);
-
-            // Copy StaticR.rel
-            string staticR = Path.Combine(packdevWorkingDir, "files", "rel", "StaticR.rel");
-            File.Copy(staticR, Path.Combine(relDir, "StaticR.rel"), true);
-
-            // Export le-code config file
-            string lecodeBin = WriteLECODEBin(image, relDir);
-
-            // Patch le-code config file
-            PatchLECODEConfig(lecodeBin);
-
-
-
-            // Create Race/Course
-            //--------------------
-            string raceDir = Path.Combine(patchDir, "Race");
-            Directory.CreateDirectory(raceDir);
-
-            string courseDir = Path.Combine(raceDir, "Course");
-            Directory.CreateDirectory(courseDir);
-            
-            // Copy course SZS files to directory
-            foreach(Cup c in _cups)
-            {
-                foreach(Track t in c.Tracks)
-                {
-                    File.Copy(t.File, Path.Combine(courseDir, Path.GetFileName(t.File)), true);
-                }
-            }
-
-            // Patch courses to le-code config file
-            PatchTracksToLECODEBin(lecodeBin, ctdef, courseDir);
-
-
-
-            // Create sys directory
-            //----------------------
-            string sysDir = Path.Combine(patchDir, "sys");
-            Directory.CreateDirectory(sysDir);
-
-            // Copy main.dol
-            string mainDol = Path.Combine(packdevWorkingDir, "sys", "main.dol");
-            File.Copy(mainDol, Path.Combine(sysDir, "main.dol"), true);
-
-            // Patch main.dol
-            PatchMainDol(Path.Combine(sysDir, "main.dol"));
-
-
-
-            // Write XML
-            //-----------
-            string xml = Path.Combine(riivDir, $"{FormatName()}.xml");
-            WriteRiivXML(xml, courseDir, uiDir, Path.GetFileName(lecodeBin), GetImageID(image));
-
-            Console.WriteLine("Process completed");
-        }
+        
     }
 }

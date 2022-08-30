@@ -2,7 +2,7 @@
 
 namespace PackDevNET
 {
-    enum Slot
+    public enum Slot
     {
         LC    = 11,
         MMM   = 12,
@@ -38,7 +38,7 @@ namespace PackDevNET
         nBC   = 84
     }
 
-    internal class Track
+    public class Track
     {
         private string _file;
         private string _name;

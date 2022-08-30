@@ -445,7 +445,9 @@ namespace PackDevNET
 
             if (ef.ShowDialog() == DialogResult.OK)
             {
-                _pack.ExportRiiv(ef.ExportPath, ef.ImagePath);
+                ProgressForm pf = new ProgressForm(_pack);
+                pf.Show();
+                pf.ExportRiiv(ef.ExportPath, ef.ImagePath);
             }
         }
 

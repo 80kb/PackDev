@@ -3,7 +3,7 @@ using System.Drawing;
 
 namespace PackDevNET
 {
-    internal class Cup
+    public class Cup
     {
         private string _name { get; set; }
         private Image _image { get; set; }

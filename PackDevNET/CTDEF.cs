@@ -7,7 +7,7 @@ using System.Threading.Tasks;
 
 namespace PackDevNET
 {
-    internal class CTDEF
+    public class CTDEF
     {
         private Pack _pack;
         private List<Cup> _cups;
