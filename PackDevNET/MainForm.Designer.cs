@@ -59,6 +59,7 @@
             this.trackAddBtn = new System.Windows.Forms.Button();
             this.trackList = new System.Windows.Forms.ListBox();
             this.cupName = new System.Windows.Forms.TextBox();
+            this.cupImage = new System.Windows.Forms.PictureBox();
             this.cupDownBtn = new System.Windows.Forms.Button();
             this.cupUpBtn = new System.Windows.Forms.Button();
             this.cupRemoveBtn = new System.Windows.Forms.Button();
@@ -67,6 +68,7 @@
             this.projectConfig = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
             this.ctTTCheckBox = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.perfMonCheckBox = new System.Windows.Forms.CheckBox();
             this.enable200CheckBox = new System.Windows.Forms.CheckBox();
             this.cheatModeCheckBox = new System.Windows.Forms.CheckBox();
@@ -82,18 +84,16 @@
             this.packNameLabel = new System.Windows.Forms.Label();
             this.ctDef = new System.Windows.Forms.TabPage();
             this.ctDefTextBox = new System.Windows.Forms.RichTextBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.cupImage = new System.Windows.Forms.PictureBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.tracks.SuspendLayout();
             this.trackGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cupImage)).BeginInit();
             this.projectConfig.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.ctDefFlagsGroup.SuspendLayout();
             this.trackModeGroup.SuspendLayout();
             this.ctDef.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cupImage)).BeginInit();
             this.SuspendLayout();
             // 
             // menuStrip1
@@ -474,6 +474,17 @@
             this.cupName.TabIndex = 3;
             this.cupName.TextChanged += new System.EventHandler(this.cupName_TextChanged);
             // 
+            // cupImage
+            // 
+            this.cupImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
+            this.cupImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.cupImage.Location = new System.Drawing.Point(7, 7);
+            this.cupImage.Name = "cupImage";
+            this.cupImage.Size = new System.Drawing.Size(100, 100);
+            this.cupImage.TabIndex = 2;
+            this.cupImage.TabStop = false;
+            this.cupImage.DoubleClick += new System.EventHandler(this.cupImage_DoubleClick);
+            // 
             // cupDownBtn
             // 
             this.cupDownBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
@@ -573,6 +584,17 @@
             this.ctTTCheckBox.UseVisualStyleBackColor = true;
             this.ctTTCheckBox.CheckedChanged += new System.EventHandler(this.ctTTCheckBox_CheckedChanged);
             // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Enabled = false;
+            this.checkBox1.Location = new System.Drawing.Point(6, 111);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(89, 17);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Speedometer";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
             // perfMonCheckBox
             // 
             this.perfMonCheckBox.AutoSize = true;
@@ -634,7 +656,6 @@
             // wiimmCupCheckBox
             // 
             this.wiimmCupCheckBox.AutoSize = true;
-            this.wiimmCupCheckBox.Enabled = false;
             this.wiimmCupCheckBox.Location = new System.Drawing.Point(6, 19);
             this.wiimmCupCheckBox.Name = "wiimmCupCheckBox";
             this.wiimmCupCheckBox.Size = new System.Drawing.Size(79, 17);
@@ -743,28 +764,6 @@
             this.ctDefTextBox.TabIndex = 0;
             this.ctDefTextBox.Text = "";
             // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Enabled = false;
-            this.checkBox1.Location = new System.Drawing.Point(6, 111);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(89, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Speedometer";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // cupImage
-            // 
-            this.cupImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.cupImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cupImage.Location = new System.Drawing.Point(7, 7);
-            this.cupImage.Name = "cupImage";
-            this.cupImage.Size = new System.Drawing.Size(100, 100);
-            this.cupImage.TabIndex = 2;
-            this.cupImage.TabStop = false;
-            this.cupImage.DoubleClick += new System.EventHandler(this.cupImage_DoubleClick);
-            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -784,6 +783,7 @@
             this.tracks.PerformLayout();
             this.trackGroupBox.ResumeLayout(false);
             this.trackGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cupImage)).EndInit();
             this.projectConfig.ResumeLayout(false);
             this.projectConfig.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -793,7 +793,6 @@
             this.trackModeGroup.ResumeLayout(false);
             this.trackModeGroup.PerformLayout();
             this.ctDef.ResumeLayout(false);
-            ((System.ComponentModel.ISupportInitialize)(this.cupImage)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 

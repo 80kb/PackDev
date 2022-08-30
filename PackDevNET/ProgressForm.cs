@@ -11,6 +11,7 @@ namespace PackDevNET
         {
             InitializeComponent();
 
+            MaximizeBox = false;
             _pack = pack;
         }
 
@@ -162,8 +163,11 @@ namespace PackDevNET
             _pack.WriteRiivXML(xml, courseDir, uiDir, Path.GetFileName(lecodeBin), _pack.GetImageID(image));
 
             // Console.WriteLine("Process completed");
-            progressStepLabel.Text = "Finished";
+            progressStepLabel.Text = "";
             progressBar.Value++;
+
+            MessageBox.Show("Exporting completed!");
+            Close();
         }
 
         public void UpdateProgress(string message)

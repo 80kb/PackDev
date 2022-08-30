@@ -98,12 +98,6 @@ namespace PackDevNET
             return result;
         }
 
-        // returns the name of the pack formatted for the files
-        public string FormatName()
-        {
-            return Regex.Replace(_name, @"\s+", "");
-        }
-
         // Calls a wiimms tool command
         private void WiimmCommand(string tool, string args)
         {
@@ -121,6 +115,18 @@ namespace PackDevNET
 
             wit.Start();
             wit.WaitForExit();
+        }
+
+
+
+        //--------------------------
+        //----- Public Methods -----
+        //--------------------------
+
+        // returns the name of the pack formatted for the files
+        public string FormatName()
+        {
+            return Regex.Replace(_name, @"\s+", "");
         }
 
         // Get the ID of an MKW Image file
@@ -514,12 +520,6 @@ namespace PackDevNET
 
         }
 
-
-
-        //--------------------------
-        //----- Public Methods -----
-        //--------------------------
-
         // Adds a single new cup to the projects
         public void AddCup(string name) 
         {
@@ -586,40 +586,5 @@ namespace PackDevNET
                 this._cups.Add(newCup);
             }
         }
-
-
-
-        //---------------------
-        //----- Exporting -----
-        //---------------------
-
-        // Verifies if the given ISO file is a Mario Kart Wii disc image
-        public bool VerifyImage(string path)
-        {
-            string ID = GetImageID(path);
-
-            if (string.IsNullOrEmpty(ID))
-                return false;
-
-            switch (ID)
-            {
-                case "RMCE01":
-                    return true;
-
-                case "RMCJ01":
-                    return true;
-
-                case "RMCK01":
-                    return true;
-
-                case "RMCP01":
-                    return true;
-            }
-
-            return false;
-        }
-
-
-        
     }
 }

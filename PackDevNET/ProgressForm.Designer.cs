@@ -55,9 +55,9 @@
             this.ClientSize = new System.Drawing.Size(375, 73);
             this.Controls.Add(this.progressStepLabel);
             this.Controls.Add(this.progressBar);
-            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedToolWindow;
+            this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ProgressForm";
-            this.Text = "Progress";
+            this.Text = "Exporting";
             this.ResumeLayout(false);
             this.PerformLayout();
 
