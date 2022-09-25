@@ -6,6 +6,7 @@ using System.Xml;
 using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
+using System.Windows.Forms;
 
 namespace PackDevNET
 {
@@ -99,7 +100,7 @@ namespace PackDevNET
         }
 
         // Calls a wiimms tool command
-        private void WiimmCommand(string tool, string args)
+        private bool WiimmCommand(string tool, string args)
         {
             string workingDir = AppDomain.CurrentDomain.BaseDirectory;
 
@@ -115,6 +116,8 @@ namespace PackDevNET
 
             wit.Start();
             wit.WaitForExit();
+
+            return true;
         }
 
 
@@ -333,6 +336,7 @@ namespace PackDevNET
                 string commonBmg = Path.Combine(dynamicDir, "message", "Common.bmg");
                 if (File.Exists(commonBmg))
                 {
+                    // Convert CT-DEF into bmg.txt and substitute it in common.bmg
                     string WCTCTPath = Path.Combine(workingDir, "Wiimm", "WCTCT.exe");
                     Process wctct = new Process();
                     wctct.StartInfo.FileName = WCTCTPath;
@@ -471,6 +475,9 @@ namespace PackDevNET
         // path: path to image output as a .tpl
         public void CreateCupImages(string path)
         {
+            if (!File.Exists(path))
+                return;
+
             Image outputImage = _ninTrackMode <= 1 ? Properties.Resources.ct_icons_none : Properties.Resources.ct_icons;
 
             if (_wiimmCup)

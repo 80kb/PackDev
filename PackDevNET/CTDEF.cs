@@ -74,7 +74,7 @@ namespace PackDevNET
                 foreach (Track track in cup.Tracks)
                 {
                     //output.AppendLine($"S 0x{startSlotHex.ToString("x2")}!");
-                    output.AppendLine($"T T{(int)track.MusicSlot}; T{(int)track.PropertySlot}; 0x01; \"{Path.GetFileNameWithoutExtension(Path.GetFileName(track.File))}\"; \"{track.Name}\"; \"\"");
+                    output.AppendLine($"T T{(int)track.MusicSlot}; T{(int)track.PropertySlot}; LE$F_NEW; \"{Path.GetFileNameWithoutExtension(Path.GetFileName(track.File))}\"; \"{track.Name}\"; \"\"");
                     startSlotHex++;
                 }
             }

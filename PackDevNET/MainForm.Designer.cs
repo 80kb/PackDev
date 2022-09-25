@@ -42,6 +42,23 @@
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
+            this.projectConfig = new System.Windows.Forms.TabPage();
+            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.ctTTCheckBox = new System.Windows.Forms.CheckBox();
+            this.checkBox1 = new System.Windows.Forms.CheckBox();
+            this.perfMonCheckBox = new System.Windows.Forms.CheckBox();
+            this.enable200CheckBox = new System.Windows.Forms.CheckBox();
+            this.cheatModeCheckBox = new System.Windows.Forms.CheckBox();
+            this.ctDefFlagsGroup = new System.Windows.Forms.GroupBox();
+            this.leFlagsCheckBox = new System.Windows.Forms.CheckBox();
+            this.wiimmCupCheckBox = new System.Windows.Forms.CheckBox();
+            this.trackModeGroup = new System.Windows.Forms.GroupBox();
+            this.swapRadBtn = new System.Windows.Forms.RadioButton();
+            this.showRadBtn = new System.Windows.Forms.RadioButton();
+            this.hideRadBtn = new System.Windows.Forms.RadioButton();
+            this.noneRadBtn = new System.Windows.Forms.RadioButton();
+            this.packNameTextBox = new System.Windows.Forms.TextBox();
+            this.packNameLabel = new System.Windows.Forms.Label();
             this.tracks = new System.Windows.Forms.TabPage();
             this.trackGroupBox = new System.Windows.Forms.GroupBox();
             this.musicSlotCombo = new System.Windows.Forms.ComboBox();
@@ -65,34 +82,20 @@
             this.cupRemoveBtn = new System.Windows.Forms.Button();
             this.cupAddBtn = new System.Windows.Forms.Button();
             this.cupList = new System.Windows.Forms.ListBox();
-            this.projectConfig = new System.Windows.Forms.TabPage();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
-            this.ctTTCheckBox = new System.Windows.Forms.CheckBox();
-            this.checkBox1 = new System.Windows.Forms.CheckBox();
-            this.perfMonCheckBox = new System.Windows.Forms.CheckBox();
-            this.enable200CheckBox = new System.Windows.Forms.CheckBox();
-            this.cheatModeCheckBox = new System.Windows.Forms.CheckBox();
-            this.ctDefFlagsGroup = new System.Windows.Forms.GroupBox();
-            this.leFlagsCheckBox = new System.Windows.Forms.CheckBox();
-            this.wiimmCupCheckBox = new System.Windows.Forms.CheckBox();
-            this.trackModeGroup = new System.Windows.Forms.GroupBox();
-            this.swapRadBtn = new System.Windows.Forms.RadioButton();
-            this.showRadBtn = new System.Windows.Forms.RadioButton();
-            this.hideRadBtn = new System.Windows.Forms.RadioButton();
-            this.noneRadBtn = new System.Windows.Forms.RadioButton();
-            this.packNameTextBox = new System.Windows.Forms.TextBox();
-            this.packNameLabel = new System.Windows.Forms.Label();
             this.ctDef = new System.Windows.Forms.TabPage();
             this.ctDefTextBox = new System.Windows.Forms.RichTextBox();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alphabeticallyAZToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
-            this.tracks.SuspendLayout();
-            this.trackGroupBox.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cupImage)).BeginInit();
             this.projectConfig.SuspendLayout();
             this.groupBox1.SuspendLayout();
             this.ctDefFlagsGroup.SuspendLayout();
             this.trackModeGroup.SuspendLayout();
+            this.tracks.SuspendLayout();
+            this.trackGroupBox.SuspendLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cupImage)).BeginInit();
             this.ctDef.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -100,7 +103,8 @@
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.Transparent;
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.fileToolStripMenuItem});
+            this.fileToolStripMenuItem,
+            this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
             this.menuStrip1.Size = new System.Drawing.Size(867, 24);
@@ -196,14 +200,214 @@
             this.tabControl.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.tabControl.Controls.Add(this.tracks);
             this.tabControl.Controls.Add(this.projectConfig);
+            this.tabControl.Controls.Add(this.tracks);
             this.tabControl.Controls.Add(this.ctDef);
             this.tabControl.Location = new System.Drawing.Point(12, 27);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
             this.tabControl.Size = new System.Drawing.Size(843, 457);
             this.tabControl.TabIndex = 1;
+            // 
+            // projectConfig
+            // 
+            this.projectConfig.Controls.Add(this.groupBox1);
+            this.projectConfig.Controls.Add(this.ctDefFlagsGroup);
+            this.projectConfig.Controls.Add(this.trackModeGroup);
+            this.projectConfig.Controls.Add(this.packNameTextBox);
+            this.projectConfig.Controls.Add(this.packNameLabel);
+            this.projectConfig.Location = new System.Drawing.Point(4, 22);
+            this.projectConfig.Name = "projectConfig";
+            this.projectConfig.Padding = new System.Windows.Forms.Padding(3);
+            this.projectConfig.Size = new System.Drawing.Size(835, 431);
+            this.projectConfig.TabIndex = 1;
+            this.projectConfig.Text = "Project Config";
+            this.projectConfig.UseVisualStyleBackColor = true;
+            // 
+            // groupBox1
+            // 
+            this.groupBox1.Controls.Add(this.ctTTCheckBox);
+            this.groupBox1.Controls.Add(this.checkBox1);
+            this.groupBox1.Controls.Add(this.perfMonCheckBox);
+            this.groupBox1.Controls.Add(this.enable200CheckBox);
+            this.groupBox1.Controls.Add(this.cheatModeCheckBox);
+            this.groupBox1.Location = new System.Drawing.Point(10, 128);
+            this.groupBox1.Name = "groupBox1";
+            this.groupBox1.Size = new System.Drawing.Size(259, 135);
+            this.groupBox1.TabIndex = 4;
+            this.groupBox1.TabStop = false;
+            this.groupBox1.Text = "LPAR settings";
+            // 
+            // ctTTCheckBox
+            // 
+            this.ctTTCheckBox.AutoSize = true;
+            this.ctTTCheckBox.Checked = true;
+            this.ctTTCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.ctTTCheckBox.Location = new System.Drawing.Point(6, 88);
+            this.ctTTCheckBox.Name = "ctTTCheckBox";
+            this.ctTTCheckBox.Size = new System.Drawing.Size(94, 17);
+            this.ctTTCheckBox.TabIndex = 0;
+            this.ctTTCheckBox.Text = "CT Time Trials";
+            this.ctTTCheckBox.UseVisualStyleBackColor = true;
+            this.ctTTCheckBox.CheckedChanged += new System.EventHandler(this.ctTTCheckBox_CheckedChanged);
+            // 
+            // checkBox1
+            // 
+            this.checkBox1.AutoSize = true;
+            this.checkBox1.Enabled = false;
+            this.checkBox1.Location = new System.Drawing.Point(6, 111);
+            this.checkBox1.Name = "checkBox1";
+            this.checkBox1.Size = new System.Drawing.Size(89, 17);
+            this.checkBox1.TabIndex = 0;
+            this.checkBox1.Text = "Speedometer";
+            this.checkBox1.UseVisualStyleBackColor = true;
+            // 
+            // perfMonCheckBox
+            // 
+            this.perfMonCheckBox.AutoSize = true;
+            this.perfMonCheckBox.Location = new System.Drawing.Point(6, 65);
+            this.perfMonCheckBox.Name = "perfMonCheckBox";
+            this.perfMonCheckBox.Size = new System.Drawing.Size(124, 17);
+            this.perfMonCheckBox.TabIndex = 0;
+            this.perfMonCheckBox.Text = "Performance Monitor";
+            this.perfMonCheckBox.UseVisualStyleBackColor = true;
+            this.perfMonCheckBox.CheckedChanged += new System.EventHandler(this.perfMonCheckBox_CheckedChanged);
+            // 
+            // enable200CheckBox
+            // 
+            this.enable200CheckBox.AutoSize = true;
+            this.enable200CheckBox.Enabled = false;
+            this.enable200CheckBox.Location = new System.Drawing.Point(6, 42);
+            this.enable200CheckBox.Name = "enable200CheckBox";
+            this.enable200CheckBox.Size = new System.Drawing.Size(92, 17);
+            this.enable200CheckBox.TabIndex = 0;
+            this.enable200CheckBox.Text = "Enable 200cc";
+            this.enable200CheckBox.UseVisualStyleBackColor = true;
+            this.enable200CheckBox.CheckedChanged += new System.EventHandler(this.enable200CheckBox_CheckedChanged);
+            // 
+            // cheatModeCheckBox
+            // 
+            this.cheatModeCheckBox.AutoSize = true;
+            this.cheatModeCheckBox.Enabled = false;
+            this.cheatModeCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.cheatModeCheckBox.Name = "cheatModeCheckBox";
+            this.cheatModeCheckBox.Size = new System.Drawing.Size(83, 17);
+            this.cheatModeCheckBox.TabIndex = 0;
+            this.cheatModeCheckBox.Text = "Cheat mode";
+            this.cheatModeCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // ctDefFlagsGroup
+            // 
+            this.ctDefFlagsGroup.Controls.Add(this.leFlagsCheckBox);
+            this.ctDefFlagsGroup.Controls.Add(this.wiimmCupCheckBox);
+            this.ctDefFlagsGroup.Location = new System.Drawing.Point(149, 56);
+            this.ctDefFlagsGroup.Name = "ctDefFlagsGroup";
+            this.ctDefFlagsGroup.Size = new System.Drawing.Size(120, 66);
+            this.ctDefFlagsGroup.TabIndex = 3;
+            this.ctDefFlagsGroup.TabStop = false;
+            this.ctDefFlagsGroup.Text = "CT-DEF flags";
+            // 
+            // leFlagsCheckBox
+            // 
+            this.leFlagsCheckBox.AutoSize = true;
+            this.leFlagsCheckBox.Checked = true;
+            this.leFlagsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
+            this.leFlagsCheckBox.Enabled = false;
+            this.leFlagsCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.leFlagsCheckBox.Name = "leFlagsCheckBox";
+            this.leFlagsCheckBox.Size = new System.Drawing.Size(67, 17);
+            this.leFlagsCheckBox.TabIndex = 2;
+            this.leFlagsCheckBox.Text = "LE-Flags";
+            this.leFlagsCheckBox.UseVisualStyleBackColor = true;
+            // 
+            // wiimmCupCheckBox
+            // 
+            this.wiimmCupCheckBox.AutoSize = true;
+            this.wiimmCupCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.wiimmCupCheckBox.Name = "wiimmCupCheckBox";
+            this.wiimmCupCheckBox.Size = new System.Drawing.Size(79, 17);
+            this.wiimmCupCheckBox.TabIndex = 2;
+            this.wiimmCupCheckBox.Text = "Wiimm Cup";
+            this.wiimmCupCheckBox.UseVisualStyleBackColor = true;
+            this.wiimmCupCheckBox.CheckedChanged += new System.EventHandler(this.wiimmCupCheckBox_CheckedChanged);
+            // 
+            // trackModeGroup
+            // 
+            this.trackModeGroup.Controls.Add(this.swapRadBtn);
+            this.trackModeGroup.Controls.Add(this.showRadBtn);
+            this.trackModeGroup.Controls.Add(this.hideRadBtn);
+            this.trackModeGroup.Controls.Add(this.noneRadBtn);
+            this.trackModeGroup.Location = new System.Drawing.Point(10, 56);
+            this.trackModeGroup.Name = "trackModeGroup";
+            this.trackModeGroup.Size = new System.Drawing.Size(122, 66);
+            this.trackModeGroup.TabIndex = 3;
+            this.trackModeGroup.TabStop = false;
+            this.trackModeGroup.Text = "Nintendo track mode";
+            // 
+            // swapRadBtn
+            // 
+            this.swapRadBtn.AutoSize = true;
+            this.swapRadBtn.Location = new System.Drawing.Point(63, 42);
+            this.swapRadBtn.Name = "swapRadBtn";
+            this.swapRadBtn.Size = new System.Drawing.Size(52, 17);
+            this.swapRadBtn.TabIndex = 0;
+            this.swapRadBtn.Text = "Swap";
+            this.swapRadBtn.UseVisualStyleBackColor = true;
+            this.swapRadBtn.CheckedChanged += new System.EventHandler(this.swapRadBtn_CheckedChanged);
+            // 
+            // showRadBtn
+            // 
+            this.showRadBtn.AutoSize = true;
+            this.showRadBtn.Location = new System.Drawing.Point(63, 19);
+            this.showRadBtn.Name = "showRadBtn";
+            this.showRadBtn.Size = new System.Drawing.Size(52, 17);
+            this.showRadBtn.TabIndex = 0;
+            this.showRadBtn.Text = "Show";
+            this.showRadBtn.UseVisualStyleBackColor = true;
+            this.showRadBtn.CheckedChanged += new System.EventHandler(this.showRadBtn_CheckedChanged);
+            // 
+            // hideRadBtn
+            // 
+            this.hideRadBtn.AutoSize = true;
+            this.hideRadBtn.Enabled = false;
+            this.hideRadBtn.Location = new System.Drawing.Point(6, 42);
+            this.hideRadBtn.Name = "hideRadBtn";
+            this.hideRadBtn.Size = new System.Drawing.Size(47, 17);
+            this.hideRadBtn.TabIndex = 0;
+            this.hideRadBtn.Text = "Hide";
+            this.hideRadBtn.UseVisualStyleBackColor = true;
+            this.hideRadBtn.CheckedChanged += new System.EventHandler(this.hideRadBtn_CheckedChanged);
+            // 
+            // noneRadBtn
+            // 
+            this.noneRadBtn.AutoSize = true;
+            this.noneRadBtn.Checked = true;
+            this.noneRadBtn.Location = new System.Drawing.Point(6, 19);
+            this.noneRadBtn.Name = "noneRadBtn";
+            this.noneRadBtn.Size = new System.Drawing.Size(51, 17);
+            this.noneRadBtn.TabIndex = 0;
+            this.noneRadBtn.TabStop = true;
+            this.noneRadBtn.Text = "None";
+            this.noneRadBtn.UseVisualStyleBackColor = true;
+            this.noneRadBtn.CheckedChanged += new System.EventHandler(this.noneRadBtn_CheckedChanged);
+            // 
+            // packNameTextBox
+            // 
+            this.packNameTextBox.Location = new System.Drawing.Point(10, 23);
+            this.packNameTextBox.Name = "packNameTextBox";
+            this.packNameTextBox.Size = new System.Drawing.Size(259, 20);
+            this.packNameTextBox.TabIndex = 1;
+            this.packNameTextBox.Text = "Untitled Pack";
+            this.packNameTextBox.TextChanged += new System.EventHandler(this.packNameTextBox_TextChanged);
+            // 
+            // packNameLabel
+            // 
+            this.packNameLabel.AutoSize = true;
+            this.packNameLabel.Location = new System.Drawing.Point(7, 7);
+            this.packNameLabel.Name = "packNameLabel";
+            this.packNameLabel.Size = new System.Drawing.Size(64, 13);
+            this.packNameLabel.TabIndex = 0;
+            this.packNameLabel.Text = "Pack name:";
             // 
             // tracks
             // 
@@ -542,206 +746,6 @@
             this.cupList.TabIndex = 0;
             this.cupList.SelectedIndexChanged += new System.EventHandler(this.cupList_SelectedIndexChanged);
             // 
-            // projectConfig
-            // 
-            this.projectConfig.Controls.Add(this.groupBox1);
-            this.projectConfig.Controls.Add(this.ctDefFlagsGroup);
-            this.projectConfig.Controls.Add(this.trackModeGroup);
-            this.projectConfig.Controls.Add(this.packNameTextBox);
-            this.projectConfig.Controls.Add(this.packNameLabel);
-            this.projectConfig.Location = new System.Drawing.Point(4, 22);
-            this.projectConfig.Name = "projectConfig";
-            this.projectConfig.Padding = new System.Windows.Forms.Padding(3);
-            this.projectConfig.Size = new System.Drawing.Size(835, 431);
-            this.projectConfig.TabIndex = 1;
-            this.projectConfig.Text = "Project Config";
-            this.projectConfig.UseVisualStyleBackColor = true;
-            // 
-            // groupBox1
-            // 
-            this.groupBox1.Controls.Add(this.ctTTCheckBox);
-            this.groupBox1.Controls.Add(this.checkBox1);
-            this.groupBox1.Controls.Add(this.perfMonCheckBox);
-            this.groupBox1.Controls.Add(this.enable200CheckBox);
-            this.groupBox1.Controls.Add(this.cheatModeCheckBox);
-            this.groupBox1.Location = new System.Drawing.Point(10, 128);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(259, 135);
-            this.groupBox1.TabIndex = 4;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "LPAR settings";
-            // 
-            // ctTTCheckBox
-            // 
-            this.ctTTCheckBox.AutoSize = true;
-            this.ctTTCheckBox.Checked = true;
-            this.ctTTCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ctTTCheckBox.Location = new System.Drawing.Point(6, 88);
-            this.ctTTCheckBox.Name = "ctTTCheckBox";
-            this.ctTTCheckBox.Size = new System.Drawing.Size(94, 17);
-            this.ctTTCheckBox.TabIndex = 0;
-            this.ctTTCheckBox.Text = "CT Time Trials";
-            this.ctTTCheckBox.UseVisualStyleBackColor = true;
-            this.ctTTCheckBox.CheckedChanged += new System.EventHandler(this.ctTTCheckBox_CheckedChanged);
-            // 
-            // checkBox1
-            // 
-            this.checkBox1.AutoSize = true;
-            this.checkBox1.Enabled = false;
-            this.checkBox1.Location = new System.Drawing.Point(6, 111);
-            this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(89, 17);
-            this.checkBox1.TabIndex = 0;
-            this.checkBox1.Text = "Speedometer";
-            this.checkBox1.UseVisualStyleBackColor = true;
-            // 
-            // perfMonCheckBox
-            // 
-            this.perfMonCheckBox.AutoSize = true;
-            this.perfMonCheckBox.Location = new System.Drawing.Point(6, 65);
-            this.perfMonCheckBox.Name = "perfMonCheckBox";
-            this.perfMonCheckBox.Size = new System.Drawing.Size(124, 17);
-            this.perfMonCheckBox.TabIndex = 0;
-            this.perfMonCheckBox.Text = "Performance Monitor";
-            this.perfMonCheckBox.UseVisualStyleBackColor = true;
-            this.perfMonCheckBox.CheckedChanged += new System.EventHandler(this.perfMonCheckBox_CheckedChanged);
-            // 
-            // enable200CheckBox
-            // 
-            this.enable200CheckBox.AutoSize = true;
-            this.enable200CheckBox.Enabled = false;
-            this.enable200CheckBox.Location = new System.Drawing.Point(6, 42);
-            this.enable200CheckBox.Name = "enable200CheckBox";
-            this.enable200CheckBox.Size = new System.Drawing.Size(92, 17);
-            this.enable200CheckBox.TabIndex = 0;
-            this.enable200CheckBox.Text = "Enable 200cc";
-            this.enable200CheckBox.UseVisualStyleBackColor = true;
-            this.enable200CheckBox.CheckedChanged += new System.EventHandler(this.enable200CheckBox_CheckedChanged);
-            // 
-            // cheatModeCheckBox
-            // 
-            this.cheatModeCheckBox.AutoSize = true;
-            this.cheatModeCheckBox.Enabled = false;
-            this.cheatModeCheckBox.Location = new System.Drawing.Point(6, 19);
-            this.cheatModeCheckBox.Name = "cheatModeCheckBox";
-            this.cheatModeCheckBox.Size = new System.Drawing.Size(83, 17);
-            this.cheatModeCheckBox.TabIndex = 0;
-            this.cheatModeCheckBox.Text = "Cheat mode";
-            this.cheatModeCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // ctDefFlagsGroup
-            // 
-            this.ctDefFlagsGroup.Controls.Add(this.leFlagsCheckBox);
-            this.ctDefFlagsGroup.Controls.Add(this.wiimmCupCheckBox);
-            this.ctDefFlagsGroup.Location = new System.Drawing.Point(149, 56);
-            this.ctDefFlagsGroup.Name = "ctDefFlagsGroup";
-            this.ctDefFlagsGroup.Size = new System.Drawing.Size(120, 66);
-            this.ctDefFlagsGroup.TabIndex = 3;
-            this.ctDefFlagsGroup.TabStop = false;
-            this.ctDefFlagsGroup.Text = "CT-DEF flags";
-            // 
-            // leFlagsCheckBox
-            // 
-            this.leFlagsCheckBox.AutoSize = true;
-            this.leFlagsCheckBox.Checked = true;
-            this.leFlagsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.leFlagsCheckBox.Enabled = false;
-            this.leFlagsCheckBox.Location = new System.Drawing.Point(6, 42);
-            this.leFlagsCheckBox.Name = "leFlagsCheckBox";
-            this.leFlagsCheckBox.Size = new System.Drawing.Size(67, 17);
-            this.leFlagsCheckBox.TabIndex = 2;
-            this.leFlagsCheckBox.Text = "LE-Flags";
-            this.leFlagsCheckBox.UseVisualStyleBackColor = true;
-            // 
-            // wiimmCupCheckBox
-            // 
-            this.wiimmCupCheckBox.AutoSize = true;
-            this.wiimmCupCheckBox.Location = new System.Drawing.Point(6, 19);
-            this.wiimmCupCheckBox.Name = "wiimmCupCheckBox";
-            this.wiimmCupCheckBox.Size = new System.Drawing.Size(79, 17);
-            this.wiimmCupCheckBox.TabIndex = 2;
-            this.wiimmCupCheckBox.Text = "Wiimm Cup";
-            this.wiimmCupCheckBox.UseVisualStyleBackColor = true;
-            this.wiimmCupCheckBox.CheckedChanged += new System.EventHandler(this.wiimmCupCheckBox_CheckedChanged);
-            // 
-            // trackModeGroup
-            // 
-            this.trackModeGroup.Controls.Add(this.swapRadBtn);
-            this.trackModeGroup.Controls.Add(this.showRadBtn);
-            this.trackModeGroup.Controls.Add(this.hideRadBtn);
-            this.trackModeGroup.Controls.Add(this.noneRadBtn);
-            this.trackModeGroup.Location = new System.Drawing.Point(10, 56);
-            this.trackModeGroup.Name = "trackModeGroup";
-            this.trackModeGroup.Size = new System.Drawing.Size(122, 66);
-            this.trackModeGroup.TabIndex = 3;
-            this.trackModeGroup.TabStop = false;
-            this.trackModeGroup.Text = "Nintendo track mode";
-            // 
-            // swapRadBtn
-            // 
-            this.swapRadBtn.AutoSize = true;
-            this.swapRadBtn.Location = new System.Drawing.Point(63, 42);
-            this.swapRadBtn.Name = "swapRadBtn";
-            this.swapRadBtn.Size = new System.Drawing.Size(52, 17);
-            this.swapRadBtn.TabIndex = 0;
-            this.swapRadBtn.Text = "Swap";
-            this.swapRadBtn.UseVisualStyleBackColor = true;
-            this.swapRadBtn.CheckedChanged += new System.EventHandler(this.swapRadBtn_CheckedChanged);
-            // 
-            // showRadBtn
-            // 
-            this.showRadBtn.AutoSize = true;
-            this.showRadBtn.Location = new System.Drawing.Point(63, 19);
-            this.showRadBtn.Name = "showRadBtn";
-            this.showRadBtn.Size = new System.Drawing.Size(52, 17);
-            this.showRadBtn.TabIndex = 0;
-            this.showRadBtn.Text = "Show";
-            this.showRadBtn.UseVisualStyleBackColor = true;
-            this.showRadBtn.CheckedChanged += new System.EventHandler(this.showRadBtn_CheckedChanged);
-            // 
-            // hideRadBtn
-            // 
-            this.hideRadBtn.AutoSize = true;
-            this.hideRadBtn.Enabled = false;
-            this.hideRadBtn.Location = new System.Drawing.Point(6, 42);
-            this.hideRadBtn.Name = "hideRadBtn";
-            this.hideRadBtn.Size = new System.Drawing.Size(47, 17);
-            this.hideRadBtn.TabIndex = 0;
-            this.hideRadBtn.Text = "Hide";
-            this.hideRadBtn.UseVisualStyleBackColor = true;
-            this.hideRadBtn.CheckedChanged += new System.EventHandler(this.hideRadBtn_CheckedChanged);
-            // 
-            // noneRadBtn
-            // 
-            this.noneRadBtn.AutoSize = true;
-            this.noneRadBtn.Checked = true;
-            this.noneRadBtn.Location = new System.Drawing.Point(6, 19);
-            this.noneRadBtn.Name = "noneRadBtn";
-            this.noneRadBtn.Size = new System.Drawing.Size(51, 17);
-            this.noneRadBtn.TabIndex = 0;
-            this.noneRadBtn.TabStop = true;
-            this.noneRadBtn.Text = "None";
-            this.noneRadBtn.UseVisualStyleBackColor = true;
-            this.noneRadBtn.CheckedChanged += new System.EventHandler(this.noneRadBtn_CheckedChanged);
-            // 
-            // packNameTextBox
-            // 
-            this.packNameTextBox.Location = new System.Drawing.Point(10, 23);
-            this.packNameTextBox.Name = "packNameTextBox";
-            this.packNameTextBox.Size = new System.Drawing.Size(259, 20);
-            this.packNameTextBox.TabIndex = 1;
-            this.packNameTextBox.Text = "Untitled Pack";
-            this.packNameTextBox.TextChanged += new System.EventHandler(this.packNameTextBox_TextChanged);
-            // 
-            // packNameLabel
-            // 
-            this.packNameLabel.AutoSize = true;
-            this.packNameLabel.Location = new System.Drawing.Point(7, 7);
-            this.packNameLabel.Name = "packNameLabel";
-            this.packNameLabel.Size = new System.Drawing.Size(64, 13);
-            this.packNameLabel.TabIndex = 0;
-            this.packNameLabel.Text = "Pack name:";
-            // 
             // ctDef
             // 
             this.ctDef.Controls.Add(this.ctDefTextBox);
@@ -764,6 +768,28 @@
             this.ctDefTextBox.TabIndex = 0;
             this.ctDefTextBox.Text = "";
             // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sortToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // sortToolStripMenuItem
+            // 
+            this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.alphabeticallyAZToolStripMenuItem});
+            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sortToolStripMenuItem.Text = "Sort";
+            // 
+            // alphabeticallyAZToolStripMenuItem
+            // 
+            this.alphabeticallyAZToolStripMenuItem.Name = "alphabeticallyAZToolStripMenuItem";
+            this.alphabeticallyAZToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.alphabeticallyAZToolStripMenuItem.Text = "Alphabetically [A-Z]";
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -779,11 +805,6 @@
             this.menuStrip1.ResumeLayout(false);
             this.menuStrip1.PerformLayout();
             this.tabControl.ResumeLayout(false);
-            this.tracks.ResumeLayout(false);
-            this.tracks.PerformLayout();
-            this.trackGroupBox.ResumeLayout(false);
-            this.trackGroupBox.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.cupImage)).EndInit();
             this.projectConfig.ResumeLayout(false);
             this.projectConfig.PerformLayout();
             this.groupBox1.ResumeLayout(false);
@@ -792,6 +813,11 @@
             this.ctDefFlagsGroup.PerformLayout();
             this.trackModeGroup.ResumeLayout(false);
             this.trackModeGroup.PerformLayout();
+            this.tracks.ResumeLayout(false);
+            this.tracks.PerformLayout();
+            this.trackGroupBox.ResumeLayout(false);
+            this.trackGroupBox.PerformLayout();
+            ((System.ComponentModel.ISupportInitialize)(this.cupImage)).EndInit();
             this.ctDef.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
@@ -855,6 +881,9 @@
         private System.Windows.Forms.CheckBox cheatModeCheckBox;
         private System.Windows.Forms.CheckBox ctTTCheckBox;
         private System.Windows.Forms.CheckBox checkBox1;
+        private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
+        private System.Windows.Forms.ToolStripMenuItem alphabeticallyAZToolStripMenuItem;
     }
 }
 
