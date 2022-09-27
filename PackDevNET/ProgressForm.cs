@@ -15,12 +15,31 @@ namespace PackDevNET
             _pack = pack;
         }
 
+        public string ImageFileDir(string directoryPath)
+        {
+            if (!Directory.Exists(Path.Combine(directoryPath, "DATA")))
+            {
+                return directoryPath;
+            }
+            else if (Directory.Exists(Path.Combine(directoryPath, "DATA")))
+            {
+                return Path.Combine(directoryPath, "DATA");
+            }
+            else
+            {
+                throw new InvalidDataException("Unknown ISO Format");
+            }
+        }
+
         // Exports as riivolution pack
         //
         // path:    output directory
         // image:   path to image file
         public void ExportRiiv(string path, string image)
         {
+
+            // wit X '.\Mario Kart Wii (USA).iso' --psel DATA -D '.\Mario Kart Wii (USA).d'
+
             // Initialize Progress Bar
             //-------------------------
             progressStepLabel.Text = "Extracting image file";
@@ -29,9 +48,11 @@ namespace PackDevNET
             progressBar.Maximum = 8;
 
 
+
             // 1. Extract image file
             //-----------------------
             string packdevWorkingDir = Path.Combine(path, "packdev-working-dir");
+
             // Console.WriteLine(packdevWorkingDir);
             _pack.ExtractImage(image, packdevWorkingDir);
 
@@ -78,6 +99,7 @@ namespace PackDevNET
 
             // Patch menu files
             string originalUIDir = Path.Combine(packdevWorkingDir, "files", "Scene", "UI");
+
             _pack.PatchMenuFiles(originalUIDir, uiDir);
 
             // Create and patch BMG files
@@ -96,6 +118,7 @@ namespace PackDevNET
 
             // Copy StaticR.rel
             string staticR = Path.Combine(packdevWorkingDir, "files", "rel", "StaticR.rel");
+
             File.Copy(staticR, Path.Combine(relDir, "StaticR.rel"), true);
 
             // Export le-code config file

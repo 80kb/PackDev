@@ -41,6 +41,9 @@
             this.importRiivolutionPackToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.toolStripSeparator1 = new System.Windows.Forms.ToolStripSeparator();
             this.exportToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.alphabeticallyAZToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.tabControl = new System.Windows.Forms.TabControl();
             this.projectConfig = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
@@ -84,9 +87,6 @@
             this.cupList = new System.Windows.Forms.ListBox();
             this.ctDef = new System.Windows.Forms.TabPage();
             this.ctDefTextBox = new System.Windows.Forms.RichTextBox();
-            this.editToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.sortToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.alphabeticallyAZToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.projectConfig.SuspendLayout();
@@ -194,6 +194,28 @@
             this.exportToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
             this.exportToolStripMenuItem.Text = "Export riivolution pack...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
+            // 
+            // editToolStripMenuItem
+            // 
+            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.sortToolStripMenuItem});
+            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Text = "Edit";
+            // 
+            // sortToolStripMenuItem
+            // 
+            this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
+            this.alphabeticallyAZToolStripMenuItem});
+            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(95, 22);
+            this.sortToolStripMenuItem.Text = "Sort";
+            // 
+            // alphabeticallyAZToolStripMenuItem
+            // 
+            this.alphabeticallyAZToolStripMenuItem.Name = "alphabeticallyAZToolStripMenuItem";
+            this.alphabeticallyAZToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.alphabeticallyAZToolStripMenuItem.Text = "Alphabetically [A-Z]";
             // 
             // tabControl
             // 
@@ -767,28 +789,6 @@
             this.ctDefTextBox.Size = new System.Drawing.Size(829, 425);
             this.ctDefTextBox.TabIndex = 0;
             this.ctDefTextBox.Text = "";
-            // 
-            // editToolStripMenuItem
-            // 
-            this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.sortToolStripMenuItem});
-            this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
-            this.editToolStripMenuItem.Text = "Edit";
-            // 
-            // sortToolStripMenuItem
-            // 
-            this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
-            this.alphabeticallyAZToolStripMenuItem});
-            this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
-            this.sortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.sortToolStripMenuItem.Text = "Sort";
-            // 
-            // alphabeticallyAZToolStripMenuItem
-            // 
-            this.alphabeticallyAZToolStripMenuItem.Name = "alphabeticallyAZToolStripMenuItem";
-            this.alphabeticallyAZToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
-            this.alphabeticallyAZToolStripMenuItem.Text = "Alphabetically [A-Z]";
             // 
             // MainForm
             // 

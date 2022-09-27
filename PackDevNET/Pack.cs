@@ -103,19 +103,26 @@ namespace PackDevNET
         private bool WiimmCommand(string tool, string args)
         {
             string workingDir = AppDomain.CurrentDomain.BaseDirectory;
-
             string WITPath = Path.Combine(workingDir, "Wiimm", $"{tool}.exe");
-            Process wit = new Process();
-            wit.StartInfo.FileName = WITPath;
-            wit.StartInfo.Arguments = args;
 
-            wit.StartInfo.RedirectStandardOutput = true;
-            wit.StartInfo.RedirectStandardError = true;
-            wit.StartInfo.UseShellExecute = false;
-            wit.StartInfo.CreateNoWindow = true;
+            using (Process wit = new Process())
+            {
+                wit.StartInfo.FileName = WITPath;
+                wit.StartInfo.Arguments = args;
 
-            wit.Start();
-            wit.WaitForExit();
+                wit.StartInfo.RedirectStandardOutput = true;
+                wit.StartInfo.RedirectStandardError = true;
+                wit.StartInfo.UseShellExecute = false;
+                wit.StartInfo.CreateNoWindow = true;
+
+                wit.Start();
+
+                //TODO: replace with
+                //https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.process.exited?redirectedfrom=MSDN&view=net-6.0
+                //
+                // chain steps as exit conditions?
+                wit.WaitForExit();
+            }
 
             return true;
         }
@@ -154,7 +161,7 @@ namespace PackDevNET
         // output:  path to extracted image folder
         public void ExtractImage(string path, string output)
         {
-            WiimmCommand("WIT", $"X \"{path}\" -q -o -D \"{output}\"");
+            WiimmCommand("WIT", $"X \"{path}\" -q -o --psel DATA -D \"{output}\"");
         }
 
         // Build the MKW Image file
