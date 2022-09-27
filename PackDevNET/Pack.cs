@@ -482,9 +482,6 @@ namespace PackDevNET
         // path: path to image output as a .tpl
         public void CreateCupImages(string path)
         {
-            if (!File.Exists(path))
-                return;
-
             Image outputImage = _ninTrackMode <= 1 ? Properties.Resources.ct_icons_none : Properties.Resources.ct_icons;
 
             if (_wiimmCup)
