@@ -46,6 +46,18 @@ namespace PackDevNET
             return "NONE";
         }
 
+        private string ToWiimmSlot(int index)
+        {
+            if (index < 32)
+                return $"T{((index & (7 << 2)) >> 2) + 1}{(index & 3) + 1}";
+            else if (index < 37)
+                return $"A{index - 21}";
+            else if (index < 42)
+                return $"A{index - 16}";
+            else
+                return $"0xC9!";
+        }
+
 
 
         //--------------------------
@@ -74,7 +86,7 @@ namespace PackDevNET
                 foreach (Track track in cup.Tracks)
                 {
                     //output.AppendLine($"S 0x{startSlotHex.ToString("x2")}!");
-                    output.AppendLine($"T T{(int)track.MusicSlot}; T{(int)track.PropertySlot}; LE$F_NEW; \"{Path.GetFileNameWithoutExtension(Path.GetFileName(track.File))}\"; \"{track.Name}\"; \"\"");
+                    output.AppendLine($"T {ToWiimmSlot(track.MusicSlot)}; {ToWiimmSlot(track.PropertySlot)}; LE$F_NEW; \"{Path.GetFileNameWithoutExtension(Path.GetFileName(track.File))}\"; \"{track.Name}\"; \"\"");
                     startSlotHex++;
                 }
             }

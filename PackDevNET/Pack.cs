@@ -116,11 +116,6 @@ namespace PackDevNET
                 wit.StartInfo.CreateNoWindow = true;
 
                 wit.Start();
-
-                //TODO: replace with
-                //https://learn.microsoft.com/en-us/dotnet/api/system.diagnostics.process.exited?redirectedfrom=MSDN&view=net-6.0
-                //
-                // chain steps as exit conditions?
                 wit.WaitForExit();
             }
 
