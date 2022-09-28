@@ -56,6 +56,17 @@ namespace PackDevNET
             // Console.WriteLine(packdevWorkingDir);
             _pack.ExtractImage(image, packdevWorkingDir);
 
+            // Alert user if ISO has incorrect format and abort
+            if(!Directory.Exists(Path.Combine(packdevWorkingDir, "files")))
+            {
+                MessageBox.Show(
+                    "Image file is either in an unrecognized format or invalid",
+                    "Unrecognized Format",
+                    MessageBoxButtons.OK,
+                    MessageBoxIcon.Error);
+                Close();
+            }
+
             // Update progress bar
             progressStepLabel.Text = "Creating riivolution directories";
             progressBar.Value++;
