@@ -140,8 +140,8 @@ namespace PackDevNET
             trackNameTextBox.Text = current.Name;
             trackFileTextBox.Text = current.File;
 
-            propSlotCombo.SelectedIndex = current.PropertyIndex;
-            musicSlotCombo.SelectedIndex = current.MusicIndex;
+            propSlotCombo.SelectedIndex = current.PropertySlot;
+            musicSlotCombo.SelectedIndex = current.MusicSlot;
         }
 
         // Enable or disable all cup UI buttons
