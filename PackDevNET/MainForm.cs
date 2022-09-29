@@ -147,8 +147,9 @@ namespace PackDevNET
         // Enable or disable all cup UI buttons
         private void ToggleCupInfoUI(bool enabled)
         {
-            cupName.Enabled     = enabled;
-            cupImage.Enabled    = enabled;
+            cupName.Enabled         = enabled;
+            cupImage.Enabled        = enabled;
+            arenaCheckBox.Enabled   = enabled;
 
             trackAddBtn.Enabled     = enabled;
             trackRemoveBtn.Enabled  = enabled;
@@ -502,6 +503,13 @@ namespace PackDevNET
         private void ctTTCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             _pack.SetCTTimeTrial((sender as CheckBox).Checked);
+        }
+
+        private void alphabeticallyAZToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            _pack.SortTracks();
+            UpdateCupList();
+            //UpdateTrackList();
         }
     }
 }

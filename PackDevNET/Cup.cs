@@ -5,8 +5,9 @@ namespace PackDevNET
 {
     public class Cup
     {
-        private string _name { get; set; }
-        private Image _image { get; set; }
+        private string _name;
+        private Image _image;
+        private bool _arena;
 
         private List<Track> _tracks;
 
@@ -54,6 +55,9 @@ namespace PackDevNET
 
         // Remove a track from the cup at the given index
         public void RemoveTrack(int index) { this._tracks.RemoveAt(index); }
+
+        // Clear all tracks
+        public void Clear() { this._tracks.Clear(); }
 
         // Swap the positions of two tracks in the cup
         public void SwapTracks(int index, int newIndex)

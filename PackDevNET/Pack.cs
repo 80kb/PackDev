@@ -128,6 +128,41 @@ namespace PackDevNET
         //----- Public Methods -----
         //--------------------------
 
+        // Sorts tracks alphabetically by name
+        public void SortTracks()
+        {
+            // Get list of all tracks
+            List<Track> allTracks = new List<Track>();
+            foreach(Cup c in _cups)
+            {
+                foreach(Track t in c.Tracks)
+                {
+                    allTracks.Add(t);
+                }
+            }
+
+            // Sort allTracks
+            allTracks.Sort((x, y) => string.Compare(x.Name, y.Name));
+
+            // Reinsert tracks into cups
+            Queue<Track> allTrackQueue = new Queue<Track>(allTracks);
+            foreach (Cup c in _cups)
+            {
+                if (allTrackQueue.Count <= 0)
+                    break;
+
+                c.Clear();
+
+                for(int i = 0; i < 4; i++)
+                {
+                    if (allTrackQueue.Count <= 0)
+                        break;
+
+                    c.Tracks.Add(allTrackQueue.Dequeue());
+                }
+            }
+        }
+
         // returns the name of the pack formatted for the files
         public string FormatName()
         {
