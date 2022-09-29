@@ -63,7 +63,6 @@
             this.packNameTextBox = new System.Windows.Forms.TextBox();
             this.packNameLabel = new System.Windows.Forms.Label();
             this.tracks = new System.Windows.Forms.TabPage();
-            this.arenaCheckBox = new System.Windows.Forms.CheckBox();
             this.trackGroupBox = new System.Windows.Forms.GroupBox();
             this.musicSlotCombo = new System.Windows.Forms.ComboBox();
             this.propSlotCombo = new System.Windows.Forms.ComboBox();
@@ -166,7 +165,7 @@
             // quickImportToolStripMenuItem
             // 
             this.quickImportToolStripMenuItem.Name = "quickImportToolStripMenuItem";
-            this.quickImportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.quickImportToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.quickImportToolStripMenuItem.Text = "Quick Import";
             this.quickImportToolStripMenuItem.Click += new System.EventHandler(this.quickImportToolStripMenuItem_Click);
             // 
@@ -174,7 +173,7 @@
             // 
             this.customImportToolStripMenuItem.Enabled = false;
             this.customImportToolStripMenuItem.Name = "customImportToolStripMenuItem";
-            this.customImportToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.customImportToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
             this.customImportToolStripMenuItem.Text = "Custom Import";
             // 
             // importRiivolutionPackToolStripMenuItem
@@ -209,7 +208,7 @@
             this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.alphabeticallyAZToolStripMenuItem});
             this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
-            this.sortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(95, 22);
             this.sortToolStripMenuItem.Text = "Sort";
             // 
             // alphabeticallyAZToolStripMenuItem
@@ -436,7 +435,6 @@
             // tracks
             // 
             this.tracks.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
-            this.tracks.Controls.Add(this.arenaCheckBox);
             this.tracks.Controls.Add(this.trackGroupBox);
             this.tracks.Controls.Add(this.cupName);
             this.tracks.Controls.Add(this.cupImage);
@@ -452,16 +450,6 @@
             this.tracks.TabIndex = 0;
             this.tracks.Text = "Tracks";
             this.tracks.UseVisualStyleBackColor = true;
-            // 
-            // arenaCheckBox
-            // 
-            this.arenaCheckBox.AutoSize = true;
-            this.arenaCheckBox.Location = new System.Drawing.Point(113, 33);
-            this.arenaCheckBox.Name = "arenaCheckBox";
-            this.arenaCheckBox.Size = new System.Drawing.Size(76, 17);
-            this.arenaCheckBox.TabIndex = 5;
-            this.arenaCheckBox.Text = "Arena Cup";
-            this.arenaCheckBox.UseVisualStyleBackColor = true;
             // 
             // trackGroupBox
             // 
@@ -908,7 +896,6 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alphabeticallyAZToolStripMenuItem;
-        private System.Windows.Forms.CheckBox arenaCheckBox;
     }
 }
 

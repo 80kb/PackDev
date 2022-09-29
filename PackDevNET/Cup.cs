@@ -7,7 +7,6 @@ namespace PackDevNET
     {
         private string _name;
         private Image _image;
-        private bool _arena;
 
         private List<Track> _tracks;
 

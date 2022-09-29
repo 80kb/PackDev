@@ -149,7 +149,6 @@ namespace PackDevNET
         {
             cupName.Enabled         = enabled;
             cupImage.Enabled        = enabled;
-            arenaCheckBox.Enabled   = enabled;
 
             trackAddBtn.Enabled     = enabled;
             trackRemoveBtn.Enabled  = enabled;
