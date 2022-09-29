@@ -575,9 +575,10 @@ namespace PackDevNET
                 if (newCup.Count < 4)
                 {
                     newCup.AddTrack(tracks.Dequeue());
-                    continue;
                 }
-                else
+                
+                // Add the cup once it is full
+                if (newCup.Count >= 4)
                 {
                     newCup.SetName("Cup " + this._cups.Count);
                     this._cups.Add(newCup);
