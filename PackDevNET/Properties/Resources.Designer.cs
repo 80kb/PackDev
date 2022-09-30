@@ -61,6 +61,30 @@ namespace PackDevNET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized string similar to #BMG
+        ///
+        ///  3def	= 22, LE-CODE, v=2, ct=0, le=2, par=3ff0+10, rcup=6800+400, bcup=6c00+2, t1=7000+1000, t2=0+0, a1=7020+a, a2=0+0, ref=8000+1000
+        ///  7000	= Wii Mario Circuit
+        ///  7001	= Wii Moo Moo Meadows
+        ///  7002	= Wii Mushroom Gorge
+        ///  7003	= Wii Grumble Volcano
+        ///  7004	= Wii Toad&apos;s Factory
+        ///  7005	= Wii Coconut Mall
+        ///  7006	= Wii DK&apos;s Snowboard Cross
+        ///  7007	= Wii Wario&apos;s Gold Mine
+        ///  7008	= Wii Luigi Circuit
+        ///  7009	= Wii Daisy Circuit
+        ///  700a	= Wii Moonview Highway
+        ///  700b	= Wii Maple Treeway
+        ///  700c	= Wii  [rest of string was truncated]&quot;;.
+        /// </summary>
+        internal static string all_bmg {
+            get {
+                return ResourceManager.GetString("all_bmg", resourceCulture);
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] Back {

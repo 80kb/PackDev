@@ -386,11 +386,16 @@ namespace PackDevNET
                 string commonBmg = Path.Combine(dynamicDir, "message", "Common.bmg");
                 if (File.Exists(commonBmg))
                 {
-                    // Convert CT-DEF into bmg.txt and substitute it in common.bmg
+                    // Save all.bmg.txt, and encode it
+                    string allBmg = Path.Combine(dynamicDir, "message", "all.bmg");
+                    File.WriteAllText(allBmg + ".txt", Properties.Resources.all_bmg);
+                    WiimmCommand("WBMGT", $"ENCODE \"{allBmg}\".txt");
+
+                    // Convert CT-DEF into bmg.txt
                     string WCTCTPath = Path.Combine(workingDir, "Wiimm", "WCTCT.exe");
                     Process wctct = new Process();
                     wctct.StartInfo.FileName = WCTCTPath;
-                    wctct.StartInfo.Arguments = $"--lecode BMG \"{ctdef}\" -l --patch-bmg INSERT=\"{commonBmg}\"";
+                    wctct.StartInfo.Arguments = $"--lecode BMG \"{ctdef}\" -l --patch-bmg INSERT=\"{allBmg}\"";
                     wctct.StartInfo.UseShellExecute = false;
                     wctct.StartInfo.RedirectStandardOutput = true;
                     wctct.StartInfo.CreateNoWindow = true;
@@ -403,7 +408,8 @@ namespace PackDevNET
 
                     wctct.WaitForExit();
 
-                    WiimmCommand("WBMGT", $"ENCODE \"{commonBmg}.txt\" -o");
+                    // Conglomerate all BMGs and encode
+                    WiimmCommand("WBMGT", $"PAT \"{commonBmg}\" -P INSERT=\"{commonBmg}.txt\" -o");
                     WiimmCommand("WSZST", $"CREATE \"{dynamicDir}\" -D \"{outputFile}\" -o");
                 }
 
