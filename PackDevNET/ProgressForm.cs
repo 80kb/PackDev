@@ -1,4 +1,5 @@
-﻿using System.IO;
+﻿using System.Collections.Generic;
+using System.IO;
 using System.Windows.Forms;
 
 namespace PackDevNET
@@ -152,7 +153,33 @@ namespace PackDevNET
             _pack.PatchTracksToLECODEBin(lecodeBin, ctdef, courseDir);
 
             // Put original nintendo tracks into track folder if necessary
-            string origCourse = Path.Combine(packdevWorkingDir, "files", "Race", "Course");
+            if (_pack.NinTrackMode > 1)
+            {
+                string origCourse = Path.Combine(packdevWorkingDir, "files", "Race", "Course");
+                List<Slot> targets = SlotDatabase.TrackSlots;
+                targets.Sort((x, y) => string.Compare(x.ID.ToString(), y.ID.ToString()));
+                foreach (Slot target in targets)
+                {
+                    foreach (string file in Directory.GetFiles(origCourse))
+                    {
+                        string shortName = Path.GetFileNameWithoutExtension(file);
+                        if (shortName == target.FileName)
+                        {
+                            File.Copy(
+                                file, 
+                                Path.Combine(courseDir, $"{target.ID.ToString("x3")}.szs")
+                            );
+
+                            File.Copy(
+                                Path.Combine(origCourse, $"{shortName}_d.szs"), 
+                                Path.Combine(courseDir, $"{target.ID.ToString("x3")}_d.szs")
+                            );
+
+                            break;
+                        }
+                    }
+                }
+            }
 
             // Update progress bar
             progressStepLabel.Text = ("Patching main.dol");
