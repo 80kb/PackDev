@@ -15,22 +15,6 @@ namespace PackDevNET
             _pack = pack;
         }
 
-        public string ImageFileDir(string directoryPath)
-        {
-            if (!Directory.Exists(Path.Combine(directoryPath, "DATA")))
-            {
-                return directoryPath;
-            }
-            else if (Directory.Exists(Path.Combine(directoryPath, "DATA")))
-            {
-                return Path.Combine(directoryPath, "DATA");
-            }
-            else
-            {
-                throw new InvalidDataException("Unknown ISO Format");
-            }
-        }
-
         // Exports as riivolution pack
         //
         // path:    output directory
