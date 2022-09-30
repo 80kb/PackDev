@@ -258,8 +258,8 @@ namespace PackDevNET
         public void PatchTracksToLECODEBin(string lecodeBin, string ctDefTxt, string directory)
         {
             StringBuilder patchTracksArgs = new StringBuilder();
-            patchTracksArgs.Append($"patch \"{lecodeBin}\" --le-define \"{ctDefTxt}\" --track-dir \"");
-            patchTracksArgs.Append($"{directory}\" ");
+            patchTracksArgs.Append($"patch \"{lecodeBin}\" --le-define \"{ctDefTxt}\"");
+            patchTracksArgs.Append($" --track-dir \"{directory}\"");
             patchTracksArgs.Append($" --move-tracks \"{directory}\" -o");
 
             // Console.WriteLine(patchTracksArgs.ToString());

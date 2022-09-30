@@ -46,16 +46,26 @@ namespace PackDevNET
             return "NONE";
         }
 
-        private string ToWiimmSlot(int index)
+        private string ToWiimmSlot(int index, bool music)
         {
-            if (index < 32)
-                return $"T{((index & (7 << 2)) >> 2) + 1}{(index & 3) + 1}";
-            else if (index < 37)
-                return $"A{index - 21}";
-            else if (index < 42)
-                return $"A{index - 16}";
+            if (music)
+            {
+                if (index < 32)
+                    return $"0x{SlotDatabase.TrackSlots[index].MusicID.ToString("x2")}!";
+                else if (index < 37)
+                    return $"0x{SlotDatabase.ArenaSlots[index].MusicID.ToString("x2")}!";
+                else
+                    return $"0x{SlotDatabase.GalaxyColosseum.MusicID.ToString("x2")}!";
+            }
             else
-                return $"0xC9!";
+            {
+                if (index < 32)
+                    return $"0x{SlotDatabase.TrackSlots[index].ID.ToString("x2")}!";
+                else if (index < 37)
+                    return $"0x{SlotDatabase.ArenaSlots[index].ID.ToString("x2")}!";
+                else
+                    return $"0x{SlotDatabase.GalaxyColosseum.ID.ToString("x2")}!";
+            }
         }
 
 
@@ -88,7 +98,7 @@ namespace PackDevNET
                 {
                     //output.AppendLine($"S 0x{startSlotHex.ToString("x2")}!");
                     output.AppendLine($"S 0x{startSlotHex.ToString("x1")}!");
-                    output.AppendLine($"T {ToWiimmSlot(track.MusicSlot)}; {ToWiimmSlot(track.PropertySlot)}; LE$F_NEW; \"{Path.GetFileNameWithoutExtension(Path.GetFileName(track.File))}\"; \"{track.Name}\"; \"\"");
+                    output.AppendLine($"T {ToWiimmSlot(track.MusicSlot, true)}; {ToWiimmSlot(track.PropertySlot, false)}; LE$F_NEW; \"{Path.GetFileNameWithoutExtension(Path.GetFileName(track.File))}\"; \"{track.Name}\"; \"\"");
                     startSlotHex++;
                 }
             }

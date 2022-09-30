@@ -96,6 +96,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <Compile Include="Slot.cs" />
+    <Compile Include="SlotDatabase.cs" />
     <Compile Include="Track.cs" />
     <EmbeddedResource Include="ExportForm.resx">
       <DependentUpon>ExportForm.cs</DependentUpon>

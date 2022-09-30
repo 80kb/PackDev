@@ -151,6 +151,9 @@ namespace PackDevNET
             // Patch courses to le-code config file
             _pack.PatchTracksToLECODEBin(lecodeBin, ctdef, courseDir);
 
+            // Put original nintendo tracks into track folder if necessary
+            string origCourse = Path.Combine(packdevWorkingDir, "files", "Race", "Course");
+
             // Update progress bar
             progressStepLabel.Text = ("Patching main.dol");
             progressBar.Value++;
