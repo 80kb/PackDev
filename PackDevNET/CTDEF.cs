@@ -71,9 +71,10 @@ namespace PackDevNET
             // Header stuff
             output.AppendLine("#CT-CODE");
             output.AppendLine("[RACING-TRACK-LIST]");
-            output.AppendLine($"%LE-FLAGS  = {Convert.ToInt32(_pack.Flags)}");
+            output.AppendLine();
             output.AppendLine($"%WIIMM-CUP = {Convert.ToInt32(_pack.WiimmCup)}");
-            output.AppendLine($"N N${ParseTrackMode(_pack.NinTrackMode)}"); //TODO: Add variable for this
+            output.AppendLine($"%LE-FLAGS  = {Convert.ToInt32(_pack.Flags)}");
+            output.AppendLine($"N N${ParseTrackMode(_pack.NinTrackMode)} | N$F_WII"); //TODO: Add variable for this
 
             int startSlotHex = 0x44;
 
@@ -86,6 +87,7 @@ namespace PackDevNET
                 foreach (Track track in cup.Tracks)
                 {
                     //output.AppendLine($"S 0x{startSlotHex.ToString("x2")}!");
+                    output.AppendLine($"S 0x{startSlotHex.ToString("x1")}!");
                     output.AppendLine($"T {ToWiimmSlot(track.MusicSlot)}; {ToWiimmSlot(track.PropertySlot)}; LE$F_NEW; \"{Path.GetFileNameWithoutExtension(Path.GetFileName(track.File))}\"; \"{track.Name}\"; \"\"");
                     startSlotHex++;
                 }
