@@ -286,7 +286,6 @@ namespace PackDevNET
                 "Title.szs"
             };
 
-            string workingDir = AppDomain.CurrentDomain.BaseDirectory;
             foreach (string file in files)
             {
                 string currentPath = Path.Combine(path, file);
@@ -341,10 +340,24 @@ namespace PackDevNET
                 if (Path.GetFileNameWithoutExtension(file) == "MenuMulti" || Path.GetFileNameWithoutExtension(file) == "MenuSingle")
                 {
                     string imgOutput0 = Path.Combine(dynamicDir, "button", "timg", "ct_icons.tpl");
-                    CreateCupImages(imgOutput0);
+                    try
+                    {
+                        CreateCupImages(imgOutput0);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Exception Occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
 
                     string imgOutput1 = Path.Combine(dynamicDir, "control", "timg", "ct_icons.tpl");
-                    CreateCupImages(imgOutput1);
+                    try
+                    {
+                        CreateCupImages(imgOutput1);
+                    }
+                    catch (Exception ex)
+                    {
+                        MessageBox.Show(ex.Message, "Exception Occurred", MessageBoxButtons.OK, MessageBoxIcon.Error);
+                    }
                 }
 
                 WiimmCommand("WSZST", $"CREATE \"{dynamicDir}\" -D \"{outputFile}\" -o");
@@ -377,7 +390,7 @@ namespace PackDevNET
                     string WCTCTPath = Path.Combine(workingDir, "Wiimm", "WCTCT.exe");
                     Process wctct = new Process();
                     wctct.StartInfo.FileName = WCTCTPath;
-                    wctct.StartInfo.Arguments = $"--lecode BMG \"{ctdef}\" -X --patch-bmg INSERT=\"{commonBmg}\"";
+                    wctct.StartInfo.Arguments = $"--lecode BMG \"{ctdef}\" -l --patch-bmg INSERT=\"{commonBmg}\"";
                     wctct.StartInfo.UseShellExecute = false;
                     wctct.StartInfo.RedirectStandardOutput = true;
                     wctct.StartInfo.CreateNoWindow = true;
