@@ -274,7 +274,6 @@ namespace PackDevNET
         public void PatchMenuFiles(string path, string output)
         {
             string[] files = new string[] {
-                "Award.szs",
                 "Channel.szs",
                 "Event.szs",
                 "Globe.szs",
