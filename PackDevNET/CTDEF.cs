@@ -52,8 +52,8 @@ namespace PackDevNET
             {
                 if (index < 32)
                     return $"0x{SlotDatabase.TrackSlots[index].MusicID.ToString("x2")}!";
-                else if (index < 37)
-                    return $"0x{SlotDatabase.ArenaSlots[index].MusicID.ToString("x2")}!";
+                else if (index < 42)
+                    return $"0x{SlotDatabase.ArenaSlots[index - 32].MusicID.ToString("x2")}!";
                 else
                     return $"0x{SlotDatabase.GalaxyColosseum.MusicID.ToString("x2")}!";
             }
@@ -61,8 +61,8 @@ namespace PackDevNET
             {
                 if (index < 32)
                     return $"0x{SlotDatabase.TrackSlots[index].ID.ToString("x2")}!";
-                else if (index < 37)
-                    return $"0x{SlotDatabase.ArenaSlots[index].ID.ToString("x2")}!";
+                else if (index < 42)
+                    return $"0x{SlotDatabase.ArenaSlots[index - 32].ID.ToString("x2")}!";
                 else
                     return $"0x{SlotDatabase.GalaxyColosseum.ID.ToString("x2")}!";
             }
