@@ -346,6 +346,7 @@
             // wiimmCupCheckBox
             // 
             this.wiimmCupCheckBox.AutoSize = true;
+            this.wiimmCupCheckBox.Enabled = false;
             this.wiimmCupCheckBox.Location = new System.Drawing.Point(6, 19);
             this.wiimmCupCheckBox.Name = "wiimmCupCheckBox";
             this.wiimmCupCheckBox.Size = new System.Drawing.Size(79, 17);

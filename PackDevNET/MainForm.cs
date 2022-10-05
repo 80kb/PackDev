@@ -435,6 +435,7 @@ namespace PackDevNET
         }
         #endregion
 
+        // Opens the export form and exports riivolution pack
         private void exportToolStripMenuItem_Click(object sender, EventArgs e)
         {
             ExportForm ef = new ExportForm();
@@ -445,22 +446,36 @@ namespace PackDevNET
             }
         }
 
+        // UI Event for SHOW nintendo track mode
+        //
+        // Enables wiimm cup accessibility when checked
         private void showRadBtn_CheckedChanged(object sender, EventArgs e)
         {
             if ((sender as RadioButton).Checked)
+            {
+                wiimmCupCheckBox.Enabled = true;
                 _pack.SetNinTrackMode(2);
+            }
 
             ctDefTextBox.Text = _pack.CTDEF.ToString();
         }
 
+        // UI Event for NONE nintendo track mode
+        //
+        // Disables wiimm cup when checked
         private void noneRadBtn_CheckedChanged(object sender, EventArgs e)
         {
             if ((sender as RadioButton).Checked)
+            {
+                wiimmCupCheckBox.Enabled = false;
+                wiimmCupCheckBox.Checked = false;
                 _pack.SetNinTrackMode(0);
+            }
 
             ctDefTextBox.Text = _pack.CTDEF.ToString();
         }
 
+        // UI Event for HIDE nintendo track mode (currently inaccessible)
         private void hideRadBtn_CheckedChanged(object sender, EventArgs e)
         {
             if ((sender as RadioButton).Checked)
@@ -469,40 +484,52 @@ namespace PackDevNET
             ctDefTextBox.Text = _pack.CTDEF.ToString();
         }
 
+        // UI Event for SWAP nintendo track mode
+        //
+        // Enables wiimm cup accessibility when checked
         private void swapRadBtn_CheckedChanged(object sender, EventArgs e)
         {
             if ((sender as RadioButton).Checked)
+            {
+                wiimmCupCheckBox.Enabled = true;
                 _pack.SetNinTrackMode(3);
+            }
 
             ctDefTextBox.Text = _pack.CTDEF.ToString();
         }
 
+        // UI Event for toggling wiimm cup
         private void wiimmCupCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             _pack.SetWiimmCup((sender as CheckBox).Checked);
             ctDefTextBox.Text = _pack.CTDEF.ToString();
         }
 
+        // UI Event for changing pack name
         private void packNameTextBox_TextChanged(object sender, EventArgs e)
         {
             _pack.SetName((sender as TextBox).Text);
         }
 
+        // UI Event for enabling 200cc (currently inaccessible)
         private void enable200CheckBox_CheckedChanged(object sender, EventArgs e)
         {
             _pack.Set200cc((sender as CheckBox).Checked);
         }
 
+        // UI Event for toggling performance monitor
         private void perfMonCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             _pack.SetPerfMon((sender as CheckBox).Checked);
         }
 
+        // UI Event for toggling Custom Track Time Trials
         private void ctTTCheckBox_CheckedChanged(object sender, EventArgs e)
         {
             _pack.SetCTTimeTrial((sender as CheckBox).Checked);
         }
 
+        // UI Event for sorting tracks alphabetically
         private void alphabeticallyAZToolStripMenuItem_Click(object sender, EventArgs e)
         {
             _pack.SortTracks();
