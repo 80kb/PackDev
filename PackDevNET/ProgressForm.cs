@@ -11,10 +11,11 @@ namespace PackDevNET
         {
             InitializeComponent();
 
-            this._bw = bw;
-
+            progressBar.Value = 0;
             MaximizeBox = false;
             Text = windowTitle;
+
+            this._bw = bw;
         }
 
         public void UpdateProgress(int percentCompelete, string message)
@@ -39,6 +40,8 @@ namespace PackDevNET
                     e.Cancel = true;
                 }
             }
+
+            this._bw.Dispose();
         }
     }
 }

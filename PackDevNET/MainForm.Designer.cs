@@ -87,6 +87,7 @@
             this.cupList = new System.Windows.Forms.ListBox();
             this.ctDef = new System.Windows.Forms.TabPage();
             this.ctDefTextBox = new System.Windows.Forms.RichTextBox();
+            this.somComboBox = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.projectConfig.SuspendLayout();
@@ -208,7 +209,7 @@
             this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.alphabeticallyAZToolStripMenuItem});
             this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
-            this.sortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
             this.sortToolStripMenuItem.Text = "Sort tracks";
             // 
             // alphabeticallyAZToolStripMenuItem
@@ -249,6 +250,7 @@
             // 
             // groupBox1
             // 
+            this.groupBox1.Controls.Add(this.somComboBox);
             this.groupBox1.Controls.Add(this.ctTTCheckBox);
             this.groupBox1.Controls.Add(this.checkBox1);
             this.groupBox1.Controls.Add(this.perfMonCheckBox);
@@ -256,7 +258,7 @@
             this.groupBox1.Controls.Add(this.cheatModeCheckBox);
             this.groupBox1.Location = new System.Drawing.Point(10, 128);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(259, 135);
+            this.groupBox1.Size = new System.Drawing.Size(259, 139);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "LPAR settings";
@@ -277,13 +279,13 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Enabled = false;
             this.checkBox1.Location = new System.Drawing.Point(6, 111);
             this.checkBox1.Name = "checkBox1";
             this.checkBox1.Size = new System.Drawing.Size(89, 17);
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "Speedometer";
             this.checkBox1.UseVisualStyleBackColor = true;
+            this.checkBox1.CheckedChanged += new System.EventHandler(this.checkBox1_CheckedChanged);
             // 
             // perfMonCheckBox
             // 
@@ -799,6 +801,22 @@
             this.ctDefTextBox.TabIndex = 0;
             this.ctDefTextBox.Text = "";
             // 
+            // somComboBox
+            // 
+            this.somComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.somComboBox.Enabled = false;
+            this.somComboBox.FormattingEnabled = true;
+            this.somComboBox.Items.AddRange(new object[] {
+            "Standard",
+            "1 Decimal",
+            "2 Decimals",
+            "3 Decimals"});
+            this.somComboBox.Location = new System.Drawing.Point(101, 109);
+            this.somComboBox.Name = "somComboBox";
+            this.somComboBox.Size = new System.Drawing.Size(121, 21);
+            this.somComboBox.TabIndex = 1;
+            this.somComboBox.SelectedIndexChanged += new System.EventHandler(this.somComboBox_SelectedIndexChanged);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -893,6 +911,7 @@
         private System.Windows.Forms.ToolStripMenuItem editToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem sortToolStripMenuItem;
         private System.Windows.Forms.ToolStripMenuItem alphabeticallyAZToolStripMenuItem;
+        private System.Windows.Forms.ComboBox somComboBox;
     }
 }
 

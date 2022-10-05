@@ -26,6 +26,7 @@ namespace PackDevNET
         private CTDEF _ctDef;
         private string _name;
         private int _ninTrackMode;
+        private int _som;
 
         // Initialize with default values
         public Pack()
@@ -43,6 +44,7 @@ namespace PackDevNET
             this._ctTimeTrial = true;
             this._200cc = false;
             this._perfMon = false;
+            this._som = 0;
         }
 
 
@@ -85,6 +87,9 @@ namespace PackDevNET
 
         // Sets performance monitor
         public void SetPerfMon(bool perfMon) { this._perfMon = perfMon; }
+
+        // Sets speed-o-meter
+        public void SetSom(int som) { this._som = som; }
 
 
 
@@ -316,11 +321,8 @@ namespace PackDevNET
             string xml = Path.Combine(riivDir, $"{FormatName()}.xml");
             WriteRiivXML(xml, courseDir, uiDir, Path.GetFileName(lecodeBin), GetImageID(image));
 
-            this._bwCompletion += 5;
+            this._bwCompletion = 0;
             this._bw.ReportProgress(5);
-
-            //MessageBox.Show("Exporting completed!");
-            //Close();
         }
 
 
@@ -416,7 +418,7 @@ namespace PackDevNET
             WiimmCommand("WSTRT", $"patch \"{path}\" --clean-dol --add-lecode -o");
         }
 
-        // Write lecode.bin file
+        // Write lecode.bin file bytes from resources
         //
         // image:   path to the image file
         // path:    path to the output folder
@@ -774,7 +776,32 @@ namespace PackDevNET
             argument.Append($"patch \"{path}\" -o ");
             argument.Append($"--200cc={(_200cc ? "ON" : "OFF")} ");
             argument.Append($"--perf-mon={(_perfMon ? "FORCE" : "OFF")} ");
-            argument.Append($"--custom-tt={(_ctTimeTrial ? "ON" : "OFF")}");
+            argument.Append($"--custom-tt={(_ctTimeTrial ? "ON" : "OFF")} ");
+
+            string somString = "";
+            switch (_som)
+            {
+                case 0:
+                    somString = "OFF";
+                    break;
+                case 1:
+                    somString = "ON";
+                    break;
+                case 2:
+                    somString = "1DIGIT";
+                    break;
+                case 3:
+                    somString = "2DIGITS";
+                    break;
+                case 4:
+                    somString = "3DIGITS";
+                    break;
+                default:
+                    somString = "OFF";
+                    break;
+            }
+
+            argument.Append($"--speedometer={somString} ");
 
             WiimmCommand("WLECT", argument.ToString());
 
@@ -868,7 +895,7 @@ namespace PackDevNET
 
             this._bw.DoWork += (sender, e) => ExportRiivHelper(path, image);
             this._bw.ProgressChanged += (sender, e) => pf.UpdateProgress(this._bwCompletion, this._bwMessage);
-            this._bw.RunWorkerCompleted += (sender, e) => pf.UpdateProgress(this._bwCompletion, "Export Completed!");
+            this._bw.RunWorkerCompleted += (sender, e) => pf.UpdateProgress(100, "Export Completed!");
 
             this._bw.RunWorkerAsync();
         }

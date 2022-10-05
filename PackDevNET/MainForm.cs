@@ -535,5 +535,27 @@ namespace PackDevNET
             UpdateCupList();
             //UpdateTrackList();
         }
+
+        private void checkBox1_CheckedChanged(object sender, EventArgs e)
+        {
+            somComboBox.Enabled = (sender as CheckBox).Checked;
+
+            if (!(sender as CheckBox).Checked)
+            {
+                _pack.SetSom(0);
+            }
+            else
+            {
+                somComboBox.SelectedIndex = 0;
+            }
+        }
+
+        private void somComboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            if(somComboBox.SelectedIndex <= 0)
+            {
+                _pack.SetSom(somComboBox.SelectedIndex + 1);
+            }
+        }
     }
 }
