@@ -8,6 +8,7 @@ namespace PackDevNET
 {
     internal class SlotDatabase
     {
+        // Track Slots: Luigi Circuit - N64 Bowser's Castle
         public static List<Slot> TrackSlots = new List<Slot>()
         {
             new Slot(0x08, 0x75, "Luigi Circuit", "beginner_course"),
@@ -44,6 +45,7 @@ namespace PackDevNET
             new Slot(0x1C, 0xA3, "N64 Bowser's Castle", "old_koopa_64")
         };
 
+        // Arena Slots: Block Plaza - DS Twilight House
         public static List<Slot> ArenaSlots = new List<Slot>()
         {
             new Slot(0x21, 0xB7, "Block Plaza", "block_battle"),
@@ -58,6 +60,7 @@ namespace PackDevNET
             new Slot(0x29, 0xC1, "DS Twilight House", "old_house_ds")
         };
 
+        // Special Case: Galaxy Colosseum
         public static Slot GalaxyColosseum = new Slot(0x36, 0xC9, "Galaxy Colosseum", "ring_mission");
     }
 }
