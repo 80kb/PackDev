@@ -588,7 +588,13 @@ namespace PackDevNET
         }
 
         // Removes given cup from the list
-        public void RemoveCupAt(int index) { this._cups.RemoveAt(index); }
+        public void RemoveCupAt(int index) 
+        {
+            if (index < 0 || index >= this._cups.Count)
+                return;
+
+            this._cups.RemoveAt(index); 
+        }
 
         // Swap cups at the given indices
         public void SwapCups(int index, int newIndex)
