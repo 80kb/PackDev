@@ -208,8 +208,8 @@
             this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.alphabeticallyAZToolStripMenuItem});
             this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
-            this.sortToolStripMenuItem.Size = new System.Drawing.Size(95, 22);
-            this.sortToolStripMenuItem.Text = "Sort";
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.sortToolStripMenuItem.Text = "Sort tracks";
             // 
             // alphabeticallyAZToolStripMenuItem
             // 
@@ -480,7 +480,6 @@
             // 
             // musicSlotCombo
             // 
-            this.musicSlotCombo.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.musicSlotCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.musicSlotCombo.FormattingEnabled = true;
             this.musicSlotCombo.Items.AddRange(new object[] {
@@ -535,8 +534,6 @@
             // 
             // propSlotCombo
             // 
-            this.propSlotCombo.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
-            | System.Windows.Forms.AnchorStyles.Right)));
             this.propSlotCombo.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.propSlotCombo.FormattingEnabled = true;
             this.propSlotCombo.Items.AddRange(new object[] {
@@ -580,7 +577,6 @@
             // 
             // musicSlotLbl
             // 
-            this.musicSlotLbl.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
             this.musicSlotLbl.AutoSize = true;
             this.musicSlotLbl.Location = new System.Drawing.Point(395, 143);
             this.musicSlotLbl.Name = "musicSlotLbl";
