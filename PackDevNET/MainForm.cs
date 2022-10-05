@@ -3,6 +3,7 @@ using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace PackDevNET
 {
@@ -440,9 +441,7 @@ namespace PackDevNET
 
             if (ef.ShowDialog() == DialogResult.OK)
             {
-                ProgressForm pf = new ProgressForm(_pack);
-                pf.Show();
-                pf.ExportRiiv(ef.ExportPath, ef.ImagePath);
+                _pack.ExportRiiv(ef.ExportPath, ef.ImagePath);
             }
         }
 

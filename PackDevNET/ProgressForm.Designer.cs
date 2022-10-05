@@ -44,9 +44,9 @@
             this.progressStepLabel.AutoSize = true;
             this.progressStepLabel.Location = new System.Drawing.Point(12, 9);
             this.progressStepLabel.Name = "progressStepLabel";
-            this.progressStepLabel.Size = new System.Drawing.Size(84, 13);
+            this.progressStepLabel.Size = new System.Drawing.Size(71, 13);
             this.progressStepLabel.TabIndex = 1;
-            this.progressStepLabel.Text = "sample text here";
+            this.progressStepLabel.Text = "Exporting: 0%";
             // 
             // ProgressForm
             // 
@@ -58,6 +58,7 @@
             this.FormBorderStyle = System.Windows.Forms.FormBorderStyle.FixedDialog;
             this.Name = "ProgressForm";
             this.Text = "Exporting";
+            this.FormClosing += new System.Windows.Forms.FormClosingEventHandler(this.ProgressForm_FormClosing);
             this.ResumeLayout(false);
             this.PerformLayout();
 

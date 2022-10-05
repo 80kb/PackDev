@@ -7,11 +7,16 @@ using System.Diagnostics;
 using System.Text;
 using System.Text.RegularExpressions;
 using System.Windows.Forms;
+using System.ComponentModel;
 
 namespace PackDevNET
 {
     public class Pack
     {
+        private BackgroundWorker _bw;
+        private int _bwCompletion;
+        private string _bwMessage;
+
         private List<Cup> _cups;
         private bool _flags;
         private bool _wiimmCup;
@@ -25,6 +30,10 @@ namespace PackDevNET
         // Initialize with default values
         public Pack()
         {
+            this._bw = new BackgroundWorker();
+            this._bwCompletion = 0;
+            this._bwMessage = "";
+
             this._cups = new List<Cup>();
             this._wiimmCup = false;
             this._flags = true;
@@ -100,7 +109,7 @@ namespace PackDevNET
         }
 
         // Calls a wiimms tool command
-        private bool WiimmCommand(string tool, string args)
+        private void WiimmCommand(string tool, string args)
         {
             string workingDir = AppDomain.CurrentDomain.BaseDirectory;
             string WITPath = Path.Combine(workingDir, "Wiimm", $"{tool}.exe");
@@ -118,8 +127,200 @@ namespace PackDevNET
                 wit.Start();
                 wit.WaitForExit();
             }
+        }
 
-            return true;
+        // Exports as riivolution pack
+        private async void ExportRiivHelper(string path, string image)
+        {
+
+            // wit X '.\Mario Kart Wii (USA).iso' --psel DATA -D '.\Mario Kart Wii (USA).d'
+
+            this._bwMessage = "Extracting image file";
+            this._bwCompletion += 0;
+            this._bw.ReportProgress(0);
+
+            // 1. Extract image file
+            //-----------------------
+            string packdevWorkingDir = Path.Combine(path, "packdev-working-dir");
+
+            // Console.WriteLine(packdevWorkingDir);
+            ExtractImage(image, packdevWorkingDir);
+
+            // Alert user if ISO has incorrect format and abort
+            if (!Directory.Exists(Path.Combine(packdevWorkingDir, "files")))
+            {
+                //MessageBox.Show(
+                //    "Image file is either in an unrecognized format or invalid",
+                //    "Unrecognized Format",
+                //    MessageBoxButtons.OK,
+                //    MessageBoxIcon.Error);
+                throw new Exception("Image file is either in an unrecognized format or invalid");
+            }
+
+            this._bwMessage = "Creating SD-Card directories";
+            this._bwCompletion += 30;
+            this._bw.ReportProgress(30);
+
+
+
+            // 2. Create main directories
+            //----------------------------
+            string sdRoot = Path.Combine(path, "riiv-sd");
+            Directory.CreateDirectory(sdRoot);
+
+            string patchDir = Path.Combine(sdRoot, FormatName());
+            Directory.CreateDirectory(patchDir);
+
+            string riivDir = Path.Combine(sdRoot, "riivolution");
+            Directory.CreateDirectory(riivDir);
+
+            this._bwMessage = "Saving CT-DEF.txt";
+            this._bwCompletion += 5;
+            this._bw.ReportProgress(5);
+
+
+
+            // 3. Save CT-DEF.txt and create cup images
+            //------------------------------------------
+            string ctdef = CTDEF.Save(patchDir);
+
+            this._bwMessage = "Patching menu files";
+            this._bwCompletion += 5;
+            this._bw.ReportProgress(5);
+
+
+
+
+            // 4. Create Scene/UI
+            //--------------------
+            string sceneDir = Path.Combine(patchDir, "Scene");
+            Directory.CreateDirectory(sceneDir);
+
+            string uiDir = Path.Combine(sceneDir, "UI");
+            Directory.CreateDirectory(uiDir);
+
+            // Patch menu files
+            string originalUIDir = Path.Combine(packdevWorkingDir, "files", "Scene", "UI");
+
+            PatchMenuFiles(originalUIDir, uiDir);
+
+            // Create and patch BMG files
+            CreateBMGFiles(originalUIDir, ctdef, uiDir);
+
+            this._bwMessage = "Creating REL directory";
+            this._bwCompletion += 20;
+            this._bw.ReportProgress(20);
+
+
+
+            // 5. Create rel directory
+            //-------------------------
+            string relDir = Path.Combine(patchDir, "rel");
+            Directory.CreateDirectory(relDir);
+
+            // Copy StaticR.rel
+            string staticR = Path.Combine(packdevWorkingDir, "files", "rel", "StaticR.rel");
+
+            File.Copy(staticR, Path.Combine(relDir, "StaticR.rel"), true);
+
+            // Export le-code config file
+            string lecodeBin = WriteLECODEBin(image, relDir);
+
+            // Patch le-code config file
+            PatchLECODEConfig(lecodeBin);
+
+            this._bwMessage = "Patching tracks";
+            this._bwCompletion += 10;
+            this._bw.ReportProgress(10);
+
+
+
+            // 6. Create Race/Course
+            //-----------------------
+            string raceDir = Path.Combine(patchDir, "Race");
+            Directory.CreateDirectory(raceDir);
+
+            string courseDir = Path.Combine(raceDir, "Course");
+            Directory.CreateDirectory(courseDir);
+
+            // Copy course SZS files to directory
+            foreach (Cup c in Cups)
+            {
+                foreach (Track t in c.Tracks)
+                {
+                    if (File.Exists(t.File))
+                    {
+                        File.Copy(t.File, Path.Combine(courseDir, Path.GetFileName(t.File)), true);
+                    }
+                }
+            }
+
+            // Patch courses to le-code config file
+            PatchTracksToLECODEBin(lecodeBin, ctdef, courseDir);
+
+            // Put original nintendo tracks into track folder if necessary
+            if (NinTrackMode > 1)
+            {
+                string origCourse = Path.Combine(packdevWorkingDir, "files", "Race", "Course");
+                List<Slot> targets = SlotDatabase.TrackSlots;
+                targets.Sort((x, y) => string.Compare(x.ID.ToString(), y.ID.ToString()));
+                foreach (Slot target in targets)
+                {
+                    foreach (string file in Directory.GetFiles(origCourse))
+                    {
+                        string shortName = Path.GetFileNameWithoutExtension(file);
+                        if (shortName == target.FileName)
+                        {
+                            File.Copy(
+                                file,
+                                Path.Combine(courseDir, $"{target.ID.ToString("x3")}.szs")
+                            );
+
+                            File.Copy(
+                                Path.Combine(origCourse, $"{shortName}_d.szs"),
+                                Path.Combine(courseDir, $"{target.ID.ToString("x3")}_d.szs")
+                            );
+
+                            break;
+                        }
+                    }
+                }
+            }
+
+            this._bwMessage = "Creating SYS directory";
+            this._bwCompletion += 20;
+            this._bw.ReportProgress(20);
+
+
+
+            // 7. Create sys directory
+            //-------------------------
+            string sysDir = Path.Combine(patchDir, "sys");
+            Directory.CreateDirectory(sysDir);
+
+            // Copy main.dol
+            string mainDol = Path.Combine(packdevWorkingDir, "sys", "main.dol");
+            File.Copy(mainDol, Path.Combine(sysDir, "main.dol"), true);
+
+            // Patch main.dol
+            PatchMainDol(Path.Combine(sysDir, "main.dol"));
+
+            this._bwMessage = "Writing XML";
+            this._bwCompletion += 5;
+            this._bw.ReportProgress(5);
+
+
+
+            // 8. Write XML
+            //--------------
+            string xml = Path.Combine(riivDir, $"{FormatName()}.xml");
+            WriteRiivXML(xml, courseDir, uiDir, Path.GetFileName(lecodeBin), GetImageID(image));
+
+            this._bwCompletion += 5;
+            this._bw.ReportProgress(5);
+
+            //MessageBox.Show("Exporting completed!");
+            //Close();
         }
 
 
@@ -651,6 +852,25 @@ namespace PackDevNET
                 newCup.SetName("Cup " + this._cups.Count);
                 this._cups.Add(newCup);
             }
+        }
+
+        // Exports as riivolution pack
+        //
+        // path:    output directory
+        // image:   path to image file
+        public void ExportRiiv(string path, string image)
+        {
+            ProgressForm pf = new ProgressForm(this._bw, "Exporting riivolution pack...");
+            pf.Show();
+
+            this._bw.WorkerSupportsCancellation = true;
+            this._bw.WorkerReportsProgress = true;
+
+            this._bw.DoWork += (sender, e) => ExportRiivHelper(path, image);
+            this._bw.ProgressChanged += (sender, e) => pf.UpdateProgress(this._bwCompletion, this._bwMessage);
+            this._bw.RunWorkerCompleted += (sender, e) => pf.UpdateProgress(this._bwCompletion, "Export Completed!");
+
+            this._bw.RunWorkerAsync();
         }
     }
 }
