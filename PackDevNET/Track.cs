@@ -58,5 +58,7 @@ namespace PackDevNET
         public void SetName(string name) { _name = name; }
         public void SetPropertySlot(int propertySlot) { _propertySlot = propertySlot; }
         public void SetMusicSlot(int musicSlot) { _musicSlot = musicSlot; }
+        public void SetLapCount(int laps) { _lapCount = laps; }
+        public void SetSpeed(int speed) { _speed = speed; }
     }
 }

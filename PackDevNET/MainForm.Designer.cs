@@ -47,6 +47,7 @@
             this.tabControl = new System.Windows.Forms.TabControl();
             this.projectConfig = new System.Windows.Forms.TabPage();
             this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.somComboBox = new System.Windows.Forms.ComboBox();
             this.ctTTCheckBox = new System.Windows.Forms.CheckBox();
             this.checkBox1 = new System.Windows.Forms.CheckBox();
             this.perfMonCheckBox = new System.Windows.Forms.CheckBox();
@@ -87,7 +88,6 @@
             this.cupList = new System.Windows.Forms.ListBox();
             this.ctDef = new System.Windows.Forms.TabPage();
             this.ctDefTextBox = new System.Windows.Forms.RichTextBox();
-            this.somComboBox = new System.Windows.Forms.ComboBox();
             this.menuStrip1.SuspendLayout();
             this.tabControl.SuspendLayout();
             this.projectConfig.SuspendLayout();
@@ -103,12 +103,14 @@
             // menuStrip1
             // 
             this.menuStrip1.BackColor = System.Drawing.Color.Transparent;
+            this.menuStrip1.ImageScalingSize = new System.Drawing.Size(20, 20);
             this.menuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.fileToolStripMenuItem,
             this.editToolStripMenuItem});
             this.menuStrip1.Location = new System.Drawing.Point(0, 0);
             this.menuStrip1.Name = "menuStrip1";
-            this.menuStrip1.Size = new System.Drawing.Size(867, 24);
+            this.menuStrip1.Padding = new System.Windows.Forms.Padding(7, 3, 0, 3);
+            this.menuStrip1.Size = new System.Drawing.Size(1011, 30);
             this.menuStrip1.TabIndex = 0;
             this.menuStrip1.Text = "menuStrip1";
             // 
@@ -125,34 +127,34 @@
             this.exportToolStripMenuItem});
             this.fileToolStripMenuItem.ForeColor = System.Drawing.SystemColors.ControlText;
             this.fileToolStripMenuItem.Name = "fileToolStripMenuItem";
-            this.fileToolStripMenuItem.Size = new System.Drawing.Size(37, 20);
+            this.fileToolStripMenuItem.Size = new System.Drawing.Size(47, 24);
             this.fileToolStripMenuItem.Text = "File";
             // 
             // openToolStripMenuItem
             // 
-            this.openToolStripMenuItem.Enabled = false;
             this.openToolStripMenuItem.Name = "openToolStripMenuItem";
-            this.openToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.openToolStripMenuItem.Size = new System.Drawing.Size(256, 26);
             this.openToolStripMenuItem.Text = "Open...";
+            this.openToolStripMenuItem.Click += new System.EventHandler(this.openToolStripMenuItem_Click);
             // 
             // saveToolStripMenuItem
             // 
-            this.saveToolStripMenuItem.Enabled = false;
             this.saveToolStripMenuItem.Name = "saveToolStripMenuItem";
-            this.saveToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.saveToolStripMenuItem.Size = new System.Drawing.Size(256, 26);
             this.saveToolStripMenuItem.Text = "Save";
+            this.saveToolStripMenuItem.Click += new System.EventHandler(this.saveToolStripMenuItem_Click);
             // 
             // saveAsToolStripMenuItem
             // 
-            this.saveAsToolStripMenuItem.Enabled = false;
             this.saveAsToolStripMenuItem.Name = "saveAsToolStripMenuItem";
-            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.saveAsToolStripMenuItem.Size = new System.Drawing.Size(256, 26);
             this.saveAsToolStripMenuItem.Text = "Save as...";
+            this.saveAsToolStripMenuItem.Click += new System.EventHandler(this.saveAsToolStripMenuItem_Click);
             // 
             // toolStripSeparator2
             // 
             this.toolStripSeparator2.Name = "toolStripSeparator2";
-            this.toolStripSeparator2.Size = new System.Drawing.Size(199, 6);
+            this.toolStripSeparator2.Size = new System.Drawing.Size(253, 6);
             // 
             // importTracksToolStripMenuItem
             // 
@@ -160,13 +162,13 @@
             this.quickImportToolStripMenuItem,
             this.customImportToolStripMenuItem});
             this.importTracksToolStripMenuItem.Name = "importTracksToolStripMenuItem";
-            this.importTracksToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.importTracksToolStripMenuItem.Size = new System.Drawing.Size(256, 26);
             this.importTracksToolStripMenuItem.Text = "Import tracks";
             // 
             // quickImportToolStripMenuItem
             // 
             this.quickImportToolStripMenuItem.Name = "quickImportToolStripMenuItem";
-            this.quickImportToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.quickImportToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.quickImportToolStripMenuItem.Text = "Quick Import";
             this.quickImportToolStripMenuItem.Click += new System.EventHandler(this.quickImportToolStripMenuItem_Click);
             // 
@@ -174,25 +176,25 @@
             // 
             this.customImportToolStripMenuItem.Enabled = false;
             this.customImportToolStripMenuItem.Name = "customImportToolStripMenuItem";
-            this.customImportToolStripMenuItem.Size = new System.Drawing.Size(155, 22);
+            this.customImportToolStripMenuItem.Size = new System.Drawing.Size(194, 26);
             this.customImportToolStripMenuItem.Text = "Custom Import";
             // 
             // importRiivolutionPackToolStripMenuItem
             // 
             this.importRiivolutionPackToolStripMenuItem.Enabled = false;
             this.importRiivolutionPackToolStripMenuItem.Name = "importRiivolutionPackToolStripMenuItem";
-            this.importRiivolutionPackToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.importRiivolutionPackToolStripMenuItem.Size = new System.Drawing.Size(256, 26);
             this.importRiivolutionPackToolStripMenuItem.Text = "Import riivolution XML";
             // 
             // toolStripSeparator1
             // 
             this.toolStripSeparator1.Name = "toolStripSeparator1";
-            this.toolStripSeparator1.Size = new System.Drawing.Size(199, 6);
+            this.toolStripSeparator1.Size = new System.Drawing.Size(253, 6);
             // 
             // exportToolStripMenuItem
             // 
             this.exportToolStripMenuItem.Name = "exportToolStripMenuItem";
-            this.exportToolStripMenuItem.Size = new System.Drawing.Size(202, 22);
+            this.exportToolStripMenuItem.Size = new System.Drawing.Size(256, 26);
             this.exportToolStripMenuItem.Text = "Export riivolution pack...";
             this.exportToolStripMenuItem.Click += new System.EventHandler(this.exportToolStripMenuItem_Click);
             // 
@@ -201,7 +203,7 @@
             this.editToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.sortToolStripMenuItem});
             this.editToolStripMenuItem.Name = "editToolStripMenuItem";
-            this.editToolStripMenuItem.Size = new System.Drawing.Size(39, 20);
+            this.editToolStripMenuItem.Size = new System.Drawing.Size(49, 24);
             this.editToolStripMenuItem.Text = "Edit";
             // 
             // sortToolStripMenuItem
@@ -209,13 +211,13 @@
             this.sortToolStripMenuItem.DropDownItems.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.alphabeticallyAZToolStripMenuItem});
             this.sortToolStripMenuItem.Name = "sortToolStripMenuItem";
-            this.sortToolStripMenuItem.Size = new System.Drawing.Size(129, 22);
+            this.sortToolStripMenuItem.Size = new System.Drawing.Size(165, 26);
             this.sortToolStripMenuItem.Text = "Sort tracks";
             // 
             // alphabeticallyAZToolStripMenuItem
             // 
             this.alphabeticallyAZToolStripMenuItem.Name = "alphabeticallyAZToolStripMenuItem";
-            this.alphabeticallyAZToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.alphabeticallyAZToolStripMenuItem.Size = new System.Drawing.Size(228, 26);
             this.alphabeticallyAZToolStripMenuItem.Text = "Alphabetically [A-Z]";
             this.alphabeticallyAZToolStripMenuItem.Click += new System.EventHandler(this.alphabeticallyAZToolStripMenuItem_Click);
             // 
@@ -227,10 +229,11 @@
             this.tabControl.Controls.Add(this.projectConfig);
             this.tabControl.Controls.Add(this.tracks);
             this.tabControl.Controls.Add(this.ctDef);
-            this.tabControl.Location = new System.Drawing.Point(12, 27);
+            this.tabControl.Location = new System.Drawing.Point(14, 35);
+            this.tabControl.Margin = new System.Windows.Forms.Padding(4);
             this.tabControl.Name = "tabControl";
             this.tabControl.SelectedIndex = 0;
-            this.tabControl.Size = new System.Drawing.Size(843, 457);
+            this.tabControl.Size = new System.Drawing.Size(983, 598);
             this.tabControl.TabIndex = 1;
             // 
             // projectConfig
@@ -240,10 +243,11 @@
             this.projectConfig.Controls.Add(this.trackModeGroup);
             this.projectConfig.Controls.Add(this.packNameTextBox);
             this.projectConfig.Controls.Add(this.packNameLabel);
-            this.projectConfig.Location = new System.Drawing.Point(4, 22);
+            this.projectConfig.Location = new System.Drawing.Point(4, 29);
+            this.projectConfig.Margin = new System.Windows.Forms.Padding(4);
             this.projectConfig.Name = "projectConfig";
-            this.projectConfig.Padding = new System.Windows.Forms.Padding(3);
-            this.projectConfig.Size = new System.Drawing.Size(835, 431);
+            this.projectConfig.Padding = new System.Windows.Forms.Padding(4);
+            this.projectConfig.Size = new System.Drawing.Size(975, 565);
             this.projectConfig.TabIndex = 1;
             this.projectConfig.Text = "Project Config";
             this.projectConfig.UseVisualStyleBackColor = true;
@@ -256,21 +260,41 @@
             this.groupBox1.Controls.Add(this.perfMonCheckBox);
             this.groupBox1.Controls.Add(this.enable200CheckBox);
             this.groupBox1.Controls.Add(this.cheatModeCheckBox);
-            this.groupBox1.Location = new System.Drawing.Point(10, 128);
+            this.groupBox1.Location = new System.Drawing.Point(12, 167);
+            this.groupBox1.Margin = new System.Windows.Forms.Padding(4);
             this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(259, 139);
+            this.groupBox1.Padding = new System.Windows.Forms.Padding(4);
+            this.groupBox1.Size = new System.Drawing.Size(302, 182);
             this.groupBox1.TabIndex = 4;
             this.groupBox1.TabStop = false;
             this.groupBox1.Text = "LPAR settings";
+            // 
+            // somComboBox
+            // 
+            this.somComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
+            this.somComboBox.Enabled = false;
+            this.somComboBox.FormattingEnabled = true;
+            this.somComboBox.Items.AddRange(new object[] {
+            "Standard",
+            "1 Decimal",
+            "2 Decimals",
+            "3 Decimals"});
+            this.somComboBox.Location = new System.Drawing.Point(118, 143);
+            this.somComboBox.Margin = new System.Windows.Forms.Padding(4);
+            this.somComboBox.Name = "somComboBox";
+            this.somComboBox.Size = new System.Drawing.Size(140, 25);
+            this.somComboBox.TabIndex = 1;
+            this.somComboBox.SelectedIndexChanged += new System.EventHandler(this.somComboBox_SelectedIndexChanged);
             // 
             // ctTTCheckBox
             // 
             this.ctTTCheckBox.AutoSize = true;
             this.ctTTCheckBox.Checked = true;
             this.ctTTCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
-            this.ctTTCheckBox.Location = new System.Drawing.Point(6, 88);
+            this.ctTTCheckBox.Location = new System.Drawing.Point(7, 115);
+            this.ctTTCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.ctTTCheckBox.Name = "ctTTCheckBox";
-            this.ctTTCheckBox.Size = new System.Drawing.Size(94, 17);
+            this.ctTTCheckBox.Size = new System.Drawing.Size(111, 21);
             this.ctTTCheckBox.TabIndex = 0;
             this.ctTTCheckBox.Text = "CT Time Trials";
             this.ctTTCheckBox.UseVisualStyleBackColor = true;
@@ -279,9 +303,10 @@
             // checkBox1
             // 
             this.checkBox1.AutoSize = true;
-            this.checkBox1.Location = new System.Drawing.Point(6, 111);
+            this.checkBox1.Location = new System.Drawing.Point(7, 145);
+            this.checkBox1.Margin = new System.Windows.Forms.Padding(4);
             this.checkBox1.Name = "checkBox1";
-            this.checkBox1.Size = new System.Drawing.Size(89, 17);
+            this.checkBox1.Size = new System.Drawing.Size(109, 21);
             this.checkBox1.TabIndex = 0;
             this.checkBox1.Text = "Speedometer";
             this.checkBox1.UseVisualStyleBackColor = true;
@@ -290,9 +315,10 @@
             // perfMonCheckBox
             // 
             this.perfMonCheckBox.AutoSize = true;
-            this.perfMonCheckBox.Location = new System.Drawing.Point(6, 65);
+            this.perfMonCheckBox.Location = new System.Drawing.Point(7, 85);
+            this.perfMonCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.perfMonCheckBox.Name = "perfMonCheckBox";
-            this.perfMonCheckBox.Size = new System.Drawing.Size(124, 17);
+            this.perfMonCheckBox.Size = new System.Drawing.Size(155, 21);
             this.perfMonCheckBox.TabIndex = 0;
             this.perfMonCheckBox.Text = "Performance Monitor";
             this.perfMonCheckBox.UseVisualStyleBackColor = true;
@@ -302,9 +328,10 @@
             // 
             this.enable200CheckBox.AutoSize = true;
             this.enable200CheckBox.Enabled = false;
-            this.enable200CheckBox.Location = new System.Drawing.Point(6, 42);
+            this.enable200CheckBox.Location = new System.Drawing.Point(7, 55);
+            this.enable200CheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.enable200CheckBox.Name = "enable200CheckBox";
-            this.enable200CheckBox.Size = new System.Drawing.Size(92, 17);
+            this.enable200CheckBox.Size = new System.Drawing.Size(106, 21);
             this.enable200CheckBox.TabIndex = 0;
             this.enable200CheckBox.Text = "Enable 200cc";
             this.enable200CheckBox.UseVisualStyleBackColor = true;
@@ -314,9 +341,10 @@
             // 
             this.cheatModeCheckBox.AutoSize = true;
             this.cheatModeCheckBox.Enabled = false;
-            this.cheatModeCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.cheatModeCheckBox.Location = new System.Drawing.Point(7, 25);
+            this.cheatModeCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.cheatModeCheckBox.Name = "cheatModeCheckBox";
-            this.cheatModeCheckBox.Size = new System.Drawing.Size(83, 17);
+            this.cheatModeCheckBox.Size = new System.Drawing.Size(101, 21);
             this.cheatModeCheckBox.TabIndex = 0;
             this.cheatModeCheckBox.Text = "Cheat mode";
             this.cheatModeCheckBox.UseVisualStyleBackColor = true;
@@ -325,9 +353,11 @@
             // 
             this.ctDefFlagsGroup.Controls.Add(this.leFlagsCheckBox);
             this.ctDefFlagsGroup.Controls.Add(this.wiimmCupCheckBox);
-            this.ctDefFlagsGroup.Location = new System.Drawing.Point(149, 56);
+            this.ctDefFlagsGroup.Location = new System.Drawing.Point(174, 73);
+            this.ctDefFlagsGroup.Margin = new System.Windows.Forms.Padding(4);
             this.ctDefFlagsGroup.Name = "ctDefFlagsGroup";
-            this.ctDefFlagsGroup.Size = new System.Drawing.Size(120, 66);
+            this.ctDefFlagsGroup.Padding = new System.Windows.Forms.Padding(4);
+            this.ctDefFlagsGroup.Size = new System.Drawing.Size(140, 86);
             this.ctDefFlagsGroup.TabIndex = 3;
             this.ctDefFlagsGroup.TabStop = false;
             this.ctDefFlagsGroup.Text = "CT-DEF flags";
@@ -338,9 +368,10 @@
             this.leFlagsCheckBox.Checked = true;
             this.leFlagsCheckBox.CheckState = System.Windows.Forms.CheckState.Checked;
             this.leFlagsCheckBox.Enabled = false;
-            this.leFlagsCheckBox.Location = new System.Drawing.Point(6, 42);
+            this.leFlagsCheckBox.Location = new System.Drawing.Point(7, 55);
+            this.leFlagsCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.leFlagsCheckBox.Name = "leFlagsCheckBox";
-            this.leFlagsCheckBox.Size = new System.Drawing.Size(67, 17);
+            this.leFlagsCheckBox.Size = new System.Drawing.Size(78, 21);
             this.leFlagsCheckBox.TabIndex = 2;
             this.leFlagsCheckBox.Text = "LE-Flags";
             this.leFlagsCheckBox.UseVisualStyleBackColor = true;
@@ -349,9 +380,10 @@
             // 
             this.wiimmCupCheckBox.AutoSize = true;
             this.wiimmCupCheckBox.Enabled = false;
-            this.wiimmCupCheckBox.Location = new System.Drawing.Point(6, 19);
+            this.wiimmCupCheckBox.Location = new System.Drawing.Point(7, 25);
+            this.wiimmCupCheckBox.Margin = new System.Windows.Forms.Padding(4);
             this.wiimmCupCheckBox.Name = "wiimmCupCheckBox";
-            this.wiimmCupCheckBox.Size = new System.Drawing.Size(79, 17);
+            this.wiimmCupCheckBox.Size = new System.Drawing.Size(97, 21);
             this.wiimmCupCheckBox.TabIndex = 2;
             this.wiimmCupCheckBox.Text = "Wiimm Cup";
             this.wiimmCupCheckBox.UseVisualStyleBackColor = true;
@@ -363,9 +395,11 @@
             this.trackModeGroup.Controls.Add(this.showRadBtn);
             this.trackModeGroup.Controls.Add(this.hideRadBtn);
             this.trackModeGroup.Controls.Add(this.noneRadBtn);
-            this.trackModeGroup.Location = new System.Drawing.Point(10, 56);
+            this.trackModeGroup.Location = new System.Drawing.Point(12, 73);
+            this.trackModeGroup.Margin = new System.Windows.Forms.Padding(4);
             this.trackModeGroup.Name = "trackModeGroup";
-            this.trackModeGroup.Size = new System.Drawing.Size(122, 66);
+            this.trackModeGroup.Padding = new System.Windows.Forms.Padding(4);
+            this.trackModeGroup.Size = new System.Drawing.Size(142, 86);
             this.trackModeGroup.TabIndex = 3;
             this.trackModeGroup.TabStop = false;
             this.trackModeGroup.Text = "Nintendo track mode";
@@ -373,9 +407,10 @@
             // swapRadBtn
             // 
             this.swapRadBtn.AutoSize = true;
-            this.swapRadBtn.Location = new System.Drawing.Point(63, 42);
+            this.swapRadBtn.Location = new System.Drawing.Point(74, 55);
+            this.swapRadBtn.Margin = new System.Windows.Forms.Padding(4);
             this.swapRadBtn.Name = "swapRadBtn";
-            this.swapRadBtn.Size = new System.Drawing.Size(52, 17);
+            this.swapRadBtn.Size = new System.Drawing.Size(60, 21);
             this.swapRadBtn.TabIndex = 0;
             this.swapRadBtn.Text = "Swap";
             this.swapRadBtn.UseVisualStyleBackColor = true;
@@ -384,9 +419,10 @@
             // showRadBtn
             // 
             this.showRadBtn.AutoSize = true;
-            this.showRadBtn.Location = new System.Drawing.Point(63, 19);
+            this.showRadBtn.Location = new System.Drawing.Point(74, 25);
+            this.showRadBtn.Margin = new System.Windows.Forms.Padding(4);
             this.showRadBtn.Name = "showRadBtn";
-            this.showRadBtn.Size = new System.Drawing.Size(52, 17);
+            this.showRadBtn.Size = new System.Drawing.Size(60, 21);
             this.showRadBtn.TabIndex = 0;
             this.showRadBtn.Text = "Show";
             this.showRadBtn.UseVisualStyleBackColor = true;
@@ -396,9 +432,10 @@
             // 
             this.hideRadBtn.AutoSize = true;
             this.hideRadBtn.Enabled = false;
-            this.hideRadBtn.Location = new System.Drawing.Point(6, 42);
+            this.hideRadBtn.Location = new System.Drawing.Point(7, 55);
+            this.hideRadBtn.Margin = new System.Windows.Forms.Padding(4);
             this.hideRadBtn.Name = "hideRadBtn";
-            this.hideRadBtn.Size = new System.Drawing.Size(47, 17);
+            this.hideRadBtn.Size = new System.Drawing.Size(56, 21);
             this.hideRadBtn.TabIndex = 0;
             this.hideRadBtn.Text = "Hide";
             this.hideRadBtn.UseVisualStyleBackColor = true;
@@ -408,9 +445,10 @@
             // 
             this.noneRadBtn.AutoSize = true;
             this.noneRadBtn.Checked = true;
-            this.noneRadBtn.Location = new System.Drawing.Point(6, 19);
+            this.noneRadBtn.Location = new System.Drawing.Point(7, 25);
+            this.noneRadBtn.Margin = new System.Windows.Forms.Padding(4);
             this.noneRadBtn.Name = "noneRadBtn";
-            this.noneRadBtn.Size = new System.Drawing.Size(51, 17);
+            this.noneRadBtn.Size = new System.Drawing.Size(61, 21);
             this.noneRadBtn.TabIndex = 0;
             this.noneRadBtn.TabStop = true;
             this.noneRadBtn.Text = "None";
@@ -419,9 +457,10 @@
             // 
             // packNameTextBox
             // 
-            this.packNameTextBox.Location = new System.Drawing.Point(10, 23);
+            this.packNameTextBox.Location = new System.Drawing.Point(12, 30);
+            this.packNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.packNameTextBox.Name = "packNameTextBox";
-            this.packNameTextBox.Size = new System.Drawing.Size(259, 20);
+            this.packNameTextBox.Size = new System.Drawing.Size(302, 25);
             this.packNameTextBox.TabIndex = 1;
             this.packNameTextBox.Text = "Untitled Pack";
             this.packNameTextBox.TextChanged += new System.EventHandler(this.packNameTextBox_TextChanged);
@@ -429,9 +468,10 @@
             // packNameLabel
             // 
             this.packNameLabel.AutoSize = true;
-            this.packNameLabel.Location = new System.Drawing.Point(7, 7);
+            this.packNameLabel.Location = new System.Drawing.Point(8, 9);
+            this.packNameLabel.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.packNameLabel.Name = "packNameLabel";
-            this.packNameLabel.Size = new System.Drawing.Size(64, 13);
+            this.packNameLabel.Size = new System.Drawing.Size(73, 17);
             this.packNameLabel.TabIndex = 0;
             this.packNameLabel.Text = "Pack name:";
             // 
@@ -446,10 +486,11 @@
             this.tracks.Controls.Add(this.cupRemoveBtn);
             this.tracks.Controls.Add(this.cupAddBtn);
             this.tracks.Controls.Add(this.cupList);
-            this.tracks.Location = new System.Drawing.Point(4, 22);
+            this.tracks.Location = new System.Drawing.Point(4, 29);
+            this.tracks.Margin = new System.Windows.Forms.Padding(4);
             this.tracks.Name = "tracks";
-            this.tracks.Padding = new System.Windows.Forms.Padding(3);
-            this.tracks.Size = new System.Drawing.Size(835, 431);
+            this.tracks.Padding = new System.Windows.Forms.Padding(4);
+            this.tracks.Size = new System.Drawing.Size(975, 565);
             this.tracks.TabIndex = 0;
             this.tracks.Text = "Tracks";
             this.tracks.UseVisualStyleBackColor = true;
@@ -473,9 +514,11 @@
             this.trackGroupBox.Controls.Add(this.trackRemoveBtn);
             this.trackGroupBox.Controls.Add(this.trackAddBtn);
             this.trackGroupBox.Controls.Add(this.trackList);
-            this.trackGroupBox.Location = new System.Drawing.Point(7, 124);
+            this.trackGroupBox.Location = new System.Drawing.Point(8, 162);
+            this.trackGroupBox.Margin = new System.Windows.Forms.Padding(4);
             this.trackGroupBox.Name = "trackGroupBox";
-            this.trackGroupBox.Size = new System.Drawing.Size(558, 299);
+            this.trackGroupBox.Padding = new System.Windows.Forms.Padding(4);
+            this.trackGroupBox.Size = new System.Drawing.Size(651, 391);
             this.trackGroupBox.TabIndex = 4;
             this.trackGroupBox.TabStop = false;
             this.trackGroupBox.Text = "Tracks";
@@ -528,9 +571,10 @@
             "GCN Cookie Land",
             "DS Twilight House",
             "Galaxy Colosseum"});
-            this.musicSlotCombo.Location = new System.Drawing.Point(398, 159);
+            this.musicSlotCombo.Location = new System.Drawing.Point(464, 208);
+            this.musicSlotCombo.Margin = new System.Windows.Forms.Padding(4);
             this.musicSlotCombo.Name = "musicSlotCombo";
-            this.musicSlotCombo.Size = new System.Drawing.Size(154, 21);
+            this.musicSlotCombo.Size = new System.Drawing.Size(179, 25);
             this.musicSlotCombo.TabIndex = 12;
             this.musicSlotCombo.SelectedIndexChanged += new System.EventHandler(this.musicSlotCombo_SelectedIndexChanged);
             // 
@@ -571,36 +615,40 @@
             "DS Peach Gardens  ",
             "GCN DK Mountain ",
             "N64 Bowser\'s Castle  "});
-            this.propSlotCombo.Location = new System.Drawing.Point(242, 159);
+            this.propSlotCombo.Location = new System.Drawing.Point(282, 208);
+            this.propSlotCombo.Margin = new System.Windows.Forms.Padding(4);
             this.propSlotCombo.Name = "propSlotCombo";
-            this.propSlotCombo.Size = new System.Drawing.Size(150, 21);
+            this.propSlotCombo.Size = new System.Drawing.Size(174, 25);
             this.propSlotCombo.TabIndex = 12;
             this.propSlotCombo.SelectedIndexChanged += new System.EventHandler(this.propSlotCombo_SelectedIndexChanged);
             // 
             // musicSlotLbl
             // 
             this.musicSlotLbl.AutoSize = true;
-            this.musicSlotLbl.Location = new System.Drawing.Point(395, 143);
+            this.musicSlotLbl.Location = new System.Drawing.Point(461, 187);
+            this.musicSlotLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.musicSlotLbl.Name = "musicSlotLbl";
-            this.musicSlotLbl.Size = new System.Drawing.Size(54, 13);
+            this.musicSlotLbl.Size = new System.Drawing.Size(67, 17);
             this.musicSlotLbl.TabIndex = 11;
             this.musicSlotLbl.Text = "Music slot";
             // 
             // propertySlotLbl
             // 
             this.propertySlotLbl.AutoSize = true;
-            this.propertySlotLbl.Location = new System.Drawing.Point(239, 143);
+            this.propertySlotLbl.Location = new System.Drawing.Point(279, 187);
+            this.propertySlotLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.propertySlotLbl.Name = "propertySlotLbl";
-            this.propertySlotLbl.Size = new System.Drawing.Size(65, 13);
+            this.propertySlotLbl.Size = new System.Drawing.Size(83, 17);
             this.propertySlotLbl.TabIndex = 11;
             this.propertySlotLbl.Text = "Property slot";
             // 
             // browseBtn
             // 
             this.browseBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Right)));
-            this.browseBtn.Location = new System.Drawing.Point(477, 94);
+            this.browseBtn.Location = new System.Drawing.Point(556, 123);
+            this.browseBtn.Margin = new System.Windows.Forms.Padding(4);
             this.browseBtn.Name = "browseBtn";
-            this.browseBtn.Size = new System.Drawing.Size(75, 23);
+            this.browseBtn.Size = new System.Drawing.Size(88, 30);
             this.browseBtn.TabIndex = 10;
             this.browseBtn.Text = "Browse...";
             this.browseBtn.UseVisualStyleBackColor = true;
@@ -610,17 +658,19 @@
             // 
             this.trackFileTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackFileTextBox.Location = new System.Drawing.Point(242, 96);
+            this.trackFileTextBox.Location = new System.Drawing.Point(282, 126);
+            this.trackFileTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.trackFileTextBox.Name = "trackFileTextBox";
-            this.trackFileTextBox.Size = new System.Drawing.Size(229, 20);
+            this.trackFileTextBox.Size = new System.Drawing.Size(266, 25);
             this.trackFileTextBox.TabIndex = 9;
             // 
             // trackFileLbl
             // 
             this.trackFileLbl.AutoSize = true;
-            this.trackFileLbl.Location = new System.Drawing.Point(239, 80);
+            this.trackFileLbl.Location = new System.Drawing.Point(279, 105);
+            this.trackFileLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.trackFileLbl.Name = "trackFileLbl";
-            this.trackFileLbl.Size = new System.Drawing.Size(51, 13);
+            this.trackFileLbl.Size = new System.Drawing.Size(59, 17);
             this.trackFileLbl.TabIndex = 8;
             this.trackFileLbl.Text = "Track file";
             // 
@@ -628,27 +678,30 @@
             // 
             this.trackNameTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.trackNameTextBox.Location = new System.Drawing.Point(242, 36);
+            this.trackNameTextBox.Location = new System.Drawing.Point(282, 47);
+            this.trackNameTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.trackNameTextBox.Name = "trackNameTextBox";
-            this.trackNameTextBox.Size = new System.Drawing.Size(310, 20);
+            this.trackNameTextBox.Size = new System.Drawing.Size(361, 25);
             this.trackNameTextBox.TabIndex = 7;
             this.trackNameTextBox.TextChanged += new System.EventHandler(this.trackNameTextBox_TextChanged);
             // 
             // trackNameLbl
             // 
             this.trackNameLbl.AutoSize = true;
-            this.trackNameLbl.Location = new System.Drawing.Point(239, 20);
+            this.trackNameLbl.Location = new System.Drawing.Point(279, 26);
+            this.trackNameLbl.Margin = new System.Windows.Forms.Padding(4, 0, 4, 0);
             this.trackNameLbl.Name = "trackNameLbl";
-            this.trackNameLbl.Size = new System.Drawing.Size(64, 13);
+            this.trackNameLbl.Size = new System.Drawing.Size(74, 17);
             this.trackNameLbl.TabIndex = 6;
             this.trackNameLbl.Text = "Track name";
             // 
             // trackDownBtn
             // 
             this.trackDownBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.trackDownBtn.Location = new System.Drawing.Point(181, 264);
+            this.trackDownBtn.Location = new System.Drawing.Point(211, 345);
+            this.trackDownBtn.Margin = new System.Windows.Forms.Padding(4);
             this.trackDownBtn.Name = "trackDownBtn";
-            this.trackDownBtn.Size = new System.Drawing.Size(52, 29);
+            this.trackDownBtn.Size = new System.Drawing.Size(61, 38);
             this.trackDownBtn.TabIndex = 5;
             this.trackDownBtn.Text = "Down";
             this.trackDownBtn.UseVisualStyleBackColor = true;
@@ -657,9 +710,10 @@
             // trackUpBtn
             // 
             this.trackUpBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
-            this.trackUpBtn.Location = new System.Drawing.Point(123, 264);
+            this.trackUpBtn.Location = new System.Drawing.Point(144, 345);
+            this.trackUpBtn.Margin = new System.Windows.Forms.Padding(4);
             this.trackUpBtn.Name = "trackUpBtn";
-            this.trackUpBtn.Size = new System.Drawing.Size(52, 29);
+            this.trackUpBtn.Size = new System.Drawing.Size(61, 38);
             this.trackUpBtn.TabIndex = 5;
             this.trackUpBtn.Text = "Up";
             this.trackUpBtn.UseVisualStyleBackColor = true;
@@ -669,9 +723,10 @@
             // 
             this.trackRemoveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.trackRemoveBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.trackRemoveBtn.Location = new System.Drawing.Point(65, 264);
+            this.trackRemoveBtn.Location = new System.Drawing.Point(76, 345);
+            this.trackRemoveBtn.Margin = new System.Windows.Forms.Padding(4);
             this.trackRemoveBtn.Name = "trackRemoveBtn";
-            this.trackRemoveBtn.Size = new System.Drawing.Size(52, 29);
+            this.trackRemoveBtn.Size = new System.Drawing.Size(61, 38);
             this.trackRemoveBtn.TabIndex = 5;
             this.trackRemoveBtn.Text = "--";
             this.trackRemoveBtn.UseVisualStyleBackColor = true;
@@ -681,9 +736,10 @@
             // 
             this.trackAddBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
             this.trackAddBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.trackAddBtn.Location = new System.Drawing.Point(7, 264);
+            this.trackAddBtn.Location = new System.Drawing.Point(8, 345);
+            this.trackAddBtn.Margin = new System.Windows.Forms.Padding(4);
             this.trackAddBtn.Name = "trackAddBtn";
-            this.trackAddBtn.Size = new System.Drawing.Size(52, 29);
+            this.trackAddBtn.Size = new System.Drawing.Size(61, 38);
             this.trackAddBtn.TabIndex = 5;
             this.trackAddBtn.Text = "+";
             this.trackAddBtn.UseVisualStyleBackColor = true;
@@ -694,9 +750,11 @@
             this.trackList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left)));
             this.trackList.FormattingEnabled = true;
-            this.trackList.Location = new System.Drawing.Point(7, 20);
+            this.trackList.ItemHeight = 17;
+            this.trackList.Location = new System.Drawing.Point(8, 26);
+            this.trackList.Margin = new System.Windows.Forms.Padding(4);
             this.trackList.Name = "trackList";
-            this.trackList.Size = new System.Drawing.Size(226, 238);
+            this.trackList.Size = new System.Drawing.Size(263, 310);
             this.trackList.TabIndex = 0;
             this.trackList.SelectedIndexChanged += new System.EventHandler(this.trackList_SelectedIndexChanged);
             // 
@@ -705,9 +763,10 @@
             this.cupName.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.cupName.Location = new System.Drawing.Point(113, 7);
+            this.cupName.Location = new System.Drawing.Point(132, 9);
+            this.cupName.Margin = new System.Windows.Forms.Padding(4);
             this.cupName.Name = "cupName";
-            this.cupName.Size = new System.Drawing.Size(452, 20);
+            this.cupName.Size = new System.Drawing.Size(527, 25);
             this.cupName.TabIndex = 3;
             this.cupName.TextChanged += new System.EventHandler(this.cupName_TextChanged);
             // 
@@ -715,9 +774,10 @@
             // 
             this.cupImage.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.cupImage.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.cupImage.Location = new System.Drawing.Point(7, 7);
+            this.cupImage.Location = new System.Drawing.Point(8, 9);
+            this.cupImage.Margin = new System.Windows.Forms.Padding(4);
             this.cupImage.Name = "cupImage";
-            this.cupImage.Size = new System.Drawing.Size(100, 100);
+            this.cupImage.Size = new System.Drawing.Size(116, 130);
             this.cupImage.TabIndex = 2;
             this.cupImage.TabStop = false;
             this.cupImage.DoubleClick += new System.EventHandler(this.cupImage_DoubleClick);
@@ -725,9 +785,10 @@
             // cupDownBtn
             // 
             this.cupDownBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cupDownBtn.Location = new System.Drawing.Point(777, 394);
+            this.cupDownBtn.Location = new System.Drawing.Point(906, 515);
+            this.cupDownBtn.Margin = new System.Windows.Forms.Padding(4);
             this.cupDownBtn.Name = "cupDownBtn";
-            this.cupDownBtn.Size = new System.Drawing.Size(52, 29);
+            this.cupDownBtn.Size = new System.Drawing.Size(61, 38);
             this.cupDownBtn.TabIndex = 1;
             this.cupDownBtn.Text = "Down";
             this.cupDownBtn.UseVisualStyleBackColor = true;
@@ -736,9 +797,10 @@
             // cupUpBtn
             // 
             this.cupUpBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
-            this.cupUpBtn.Location = new System.Drawing.Point(709, 394);
+            this.cupUpBtn.Location = new System.Drawing.Point(827, 515);
+            this.cupUpBtn.Margin = new System.Windows.Forms.Padding(4);
             this.cupUpBtn.Name = "cupUpBtn";
-            this.cupUpBtn.Size = new System.Drawing.Size(52, 29);
+            this.cupUpBtn.Size = new System.Drawing.Size(61, 38);
             this.cupUpBtn.TabIndex = 1;
             this.cupUpBtn.Text = "Up";
             this.cupUpBtn.UseVisualStyleBackColor = true;
@@ -748,9 +810,10 @@
             // 
             this.cupRemoveBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cupRemoveBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cupRemoveBtn.Location = new System.Drawing.Point(641, 394);
+            this.cupRemoveBtn.Location = new System.Drawing.Point(748, 515);
+            this.cupRemoveBtn.Margin = new System.Windows.Forms.Padding(4);
             this.cupRemoveBtn.Name = "cupRemoveBtn";
-            this.cupRemoveBtn.Size = new System.Drawing.Size(52, 29);
+            this.cupRemoveBtn.Size = new System.Drawing.Size(61, 38);
             this.cupRemoveBtn.TabIndex = 1;
             this.cupRemoveBtn.Text = "--";
             this.cupRemoveBtn.UseVisualStyleBackColor = true;
@@ -760,9 +823,10 @@
             // 
             this.cupAddBtn.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Right)));
             this.cupAddBtn.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.cupAddBtn.Location = new System.Drawing.Point(573, 394);
+            this.cupAddBtn.Location = new System.Drawing.Point(668, 515);
+            this.cupAddBtn.Margin = new System.Windows.Forms.Padding(4);
             this.cupAddBtn.Name = "cupAddBtn";
-            this.cupAddBtn.Size = new System.Drawing.Size(52, 29);
+            this.cupAddBtn.Size = new System.Drawing.Size(61, 38);
             this.cupAddBtn.TabIndex = 1;
             this.cupAddBtn.Text = "+";
             this.cupAddBtn.UseVisualStyleBackColor = true;
@@ -773,18 +837,21 @@
             this.cupList.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.cupList.FormattingEnabled = true;
-            this.cupList.Location = new System.Drawing.Point(571, 0);
+            this.cupList.ItemHeight = 17;
+            this.cupList.Location = new System.Drawing.Point(666, 0);
+            this.cupList.Margin = new System.Windows.Forms.Padding(4);
             this.cupList.Name = "cupList";
-            this.cupList.Size = new System.Drawing.Size(264, 381);
+            this.cupList.Size = new System.Drawing.Size(307, 497);
             this.cupList.TabIndex = 0;
             this.cupList.SelectedIndexChanged += new System.EventHandler(this.cupList_SelectedIndexChanged);
             // 
             // ctDef
             // 
             this.ctDef.Controls.Add(this.ctDefTextBox);
-            this.ctDef.Location = new System.Drawing.Point(4, 22);
+            this.ctDef.Location = new System.Drawing.Point(4, 29);
+            this.ctDef.Margin = new System.Windows.Forms.Padding(4);
             this.ctDef.Name = "ctDef";
-            this.ctDef.Size = new System.Drawing.Size(835, 431);
+            this.ctDef.Size = new System.Drawing.Size(975, 565);
             this.ctDef.TabIndex = 2;
             this.ctDef.Text = "CT-DEF";
             this.ctDef.UseVisualStyleBackColor = true;
@@ -794,39 +861,25 @@
             this.ctDefTextBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.ctDefTextBox.Location = new System.Drawing.Point(3, 3);
+            this.ctDefTextBox.Location = new System.Drawing.Point(4, 4);
+            this.ctDefTextBox.Margin = new System.Windows.Forms.Padding(4);
             this.ctDefTextBox.Name = "ctDefTextBox";
             this.ctDefTextBox.ReadOnly = true;
-            this.ctDefTextBox.Size = new System.Drawing.Size(829, 425);
+            this.ctDefTextBox.Size = new System.Drawing.Size(966, 555);
             this.ctDefTextBox.TabIndex = 0;
             this.ctDefTextBox.Text = "";
             // 
-            // somComboBox
-            // 
-            this.somComboBox.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
-            this.somComboBox.Enabled = false;
-            this.somComboBox.FormattingEnabled = true;
-            this.somComboBox.Items.AddRange(new object[] {
-            "Standard",
-            "1 Decimal",
-            "2 Decimals",
-            "3 Decimals"});
-            this.somComboBox.Location = new System.Drawing.Point(101, 109);
-            this.somComboBox.Name = "somComboBox";
-            this.somComboBox.Size = new System.Drawing.Size(121, 21);
-            this.somComboBox.TabIndex = 1;
-            this.somComboBox.SelectedIndexChanged += new System.EventHandler(this.somComboBox_SelectedIndexChanged);
-            // 
             // MainForm
             // 
-            this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
+            this.AutoScaleDimensions = new System.Drawing.SizeF(7F, 17F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BackColor = System.Drawing.SystemColors.Control;
-            this.ClientSize = new System.Drawing.Size(867, 496);
+            this.ClientSize = new System.Drawing.Size(1011, 649);
             this.Controls.Add(this.tabControl);
             this.Controls.Add(this.menuStrip1);
             this.Icon = ((System.Drawing.Icon)(resources.GetObject("$this.Icon")));
             this.MainMenuStrip = this.menuStrip1;
+            this.Margin = new System.Windows.Forms.Padding(4);
             this.Name = "MainForm";
             this.Text = "PackDev";
             this.menuStrip1.ResumeLayout(false);

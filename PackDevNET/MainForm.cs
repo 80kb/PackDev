@@ -1,7 +1,7 @@
 ﻿using System;
-using System.IO;
 using System.Collections.Generic;
 using System.Drawing;
+using System.IO;
 using System.Windows.Forms;
 
 namespace PackDevNET
@@ -11,6 +11,8 @@ namespace PackDevNET
         private Pack _pack;
         private int _selectedCup;
         private int _selectedTrack;
+        private bool _previouslySaved = false;
+        private string _fileName;
 
         public MainForm()
         {
@@ -19,8 +21,8 @@ namespace PackDevNET
             _pack = new Pack();
             UpdateCupList();
 
-            _selectedCup    = -1;
-            _selectedTrack  = -1;
+            _selectedCup = -1;
+            _selectedTrack = -1;
         }
 
 
@@ -36,25 +38,25 @@ namespace PackDevNET
             // Update button accessibility
             if (_pack.Cups.Count == 0)
             {
-                cupRemoveBtn.Enabled    = false;
-                cupUpBtn.Enabled        = false;
-                cupDownBtn.Enabled      = false;
+                cupRemoveBtn.Enabled = false;
+                cupUpBtn.Enabled = false;
+                cupDownBtn.Enabled = false;
 
                 ToggleCupInfoUI(false);
             }
             else if (_pack.Cups.Count == 1)
             {
-                cupRemoveBtn.Enabled    = true;
-                cupUpBtn.Enabled        = false;
-                cupDownBtn.Enabled      = false;
+                cupRemoveBtn.Enabled = true;
+                cupUpBtn.Enabled = false;
+                cupDownBtn.Enabled = false;
 
                 ToggleCupInfoUI(true);
             }
             else
             {
-                cupRemoveBtn.Enabled    = true;
-                cupUpBtn.Enabled        = true;
-                cupDownBtn.Enabled      = true;
+                cupRemoveBtn.Enabled = true;
+                cupUpBtn.Enabled = true;
+                cupDownBtn.Enabled = true;
 
                 ToggleCupInfoUI(true);
             }
@@ -80,25 +82,25 @@ namespace PackDevNET
             // Update button accessibility
             if (selectedCup.Tracks.Count == 0)
             {
-                trackRemoveBtn.Enabled  = false;
-                trackUpBtn.Enabled      = false;
-                trackDownBtn.Enabled    = false;
+                trackRemoveBtn.Enabled = false;
+                trackUpBtn.Enabled = false;
+                trackDownBtn.Enabled = false;
 
                 ToggleTrackInfoUI(false);
             }
             else if (selectedCup.Tracks.Count == 1)
             {
-                trackRemoveBtn.Enabled  = true;
-                trackUpBtn.Enabled      = false;
-                trackDownBtn.Enabled    = false;
+                trackRemoveBtn.Enabled = true;
+                trackUpBtn.Enabled = false;
+                trackDownBtn.Enabled = false;
 
                 ToggleTrackInfoUI(true);
             }
             else
             {
-                trackRemoveBtn.Enabled  = true;
-                trackUpBtn.Enabled      = true;
-                trackDownBtn.Enabled    = true;
+                trackRemoveBtn.Enabled = true;
+                trackUpBtn.Enabled = true;
+                trackDownBtn.Enabled = true;
 
                 ToggleTrackInfoUI(true);
             }
@@ -147,13 +149,13 @@ namespace PackDevNET
         // Enable or disable all cup UI buttons
         private void ToggleCupInfoUI(bool enabled)
         {
-            cupName.Enabled         = enabled;
-            cupImage.Enabled        = enabled;
+            cupName.Enabled = enabled;
+            cupImage.Enabled = enabled;
 
-            trackAddBtn.Enabled     = enabled;
-            trackRemoveBtn.Enabled  = enabled;
-            trackUpBtn.Enabled      = enabled;
-            trackDownBtn.Enabled    = enabled;
+            trackAddBtn.Enabled = enabled;
+            trackRemoveBtn.Enabled = enabled;
+            trackUpBtn.Enabled = enabled;
+            trackDownBtn.Enabled = enabled;
 
             trackList.Enabled = enabled;
 
@@ -167,8 +169,8 @@ namespace PackDevNET
             trackFileTextBox.Enabled = enabled;
             browseBtn.Enabled = enabled;
 
-            propSlotCombo.Enabled   = enabled;
-            musicSlotCombo.Enabled  = enabled;
+            propSlotCombo.Enabled = enabled;
+            musicSlotCombo.Enabled = enabled;
         }
 
 
@@ -214,7 +216,7 @@ namespace PackDevNET
         #region cupList manipulation
         private void cupAddBtn_Click(object sender, EventArgs e)
         {
-            _pack.AddCup( "Cup " + _pack.Cups.Count );
+            _pack.AddCup("Cup " + _pack.Cups.Count);
             UpdateCupList();
 
             // Update selected index
@@ -542,7 +544,8 @@ namespace PackDevNET
 
             if (!(sender as CheckBox).Checked)
             {
-                _pack.SetSom(0);
+                if (_pack.SomLevel != 0)
+                    _pack.SetSom(0);
             }
             else
             {
@@ -552,10 +555,117 @@ namespace PackDevNET
 
         private void somComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            if(somComboBox.SelectedIndex <= 0)
+            _pack.SetSom(somComboBox.SelectedIndex);
+            if (somComboBox.SelectedIndex < 0)
             {
                 _pack.SetSom(somComboBox.SelectedIndex + 1);
             }
+        }
+
+        private void openToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            Pack p = new Pack();
+
+            using (OpenFileDialog openFileDialog = new OpenFileDialog())
+            {
+                openFileDialog.InitialDirectory = AppDomain.CurrentDomain.BaseDirectory;
+                openFileDialog.Filter = "PackDev Projects (*.pd)|*.pd";
+                openFileDialog.RestoreDirectory = true;
+                openFileDialog.Multiselect = false;
+
+                if (openFileDialog.ShowDialog() == DialogResult.OK)
+                {
+                    p = PackSaverLoader.Load(File.ReadAllText(openFileDialog.FileName));
+                }
+            }
+
+            _pack = p;
+            packNameTextBox.Text = p.Name;
+
+            checkBox1.Checked = true;
+
+            somComboBox.SelectedIndex = p.SomLevel;
+            wiimmCupCheckBox.Checked = p.WiimmCup;
+
+            switch (p.NinTrackMode)
+            {
+                case 0:
+                    noneRadBtn.Checked = true;
+                    hideRadBtn.Checked = false;
+                    showRadBtn.Checked = false;
+                    swapRadBtn.Checked = false;
+                    break;
+                case 1:
+                    noneRadBtn.Checked = false;
+                    hideRadBtn.Checked = true;
+                    showRadBtn.Checked = false;
+                    swapRadBtn.Checked = false;
+                    break;
+                case 2:
+                    noneRadBtn.Checked = false;
+                    hideRadBtn.Checked = false;
+                    showRadBtn.Checked = true;
+                    swapRadBtn.Checked = false;
+                    break;
+                case 3:
+                    noneRadBtn.Checked = false;
+                    hideRadBtn.Checked = false;
+                    showRadBtn.Checked = false;
+                    swapRadBtn.Checked = true;
+                    break;
+            }
+
+            if(p.PerfMonEnabled)
+                perfMonCheckBox.Checked = true;
+
+            _selectedCup = 0;
+            _selectedTrack = 0;
+            if (p.Cups.Count > 0)
+            {
+                UpdateCupList();
+                UpdateTrackList();
+            }
+        }
+
+        private void saveToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            if (!_previouslySaved)
+            {
+                _fileName = _pack.Name + ".pd";
+                SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+                saveFileDialog1.FileName = _fileName;
+                saveFileDialog1.Filter = "PackDev project files (*.pd)|*.pd|All files (*.*)|*.*";
+                saveFileDialog1.RestoreDirectory = true;
+
+                DialogResult dr = saveFileDialog1.ShowDialog();
+                if (dr == DialogResult.OK)
+                {
+                    _fileName = saveFileDialog1.FileName;
+                    _previouslySaved = true;
+                }
+                else if (dr == DialogResult.Abort)
+                {
+                    return;
+                }
+            }
+            PackSaverLoader.Save(_pack, _fileName);
+        }
+
+        private void saveAsToolStripMenuItem_Click(object sender, EventArgs e)
+        {
+            string filename = _pack.Name + ".pd";
+            SaveFileDialog saveFileDialog1 = new SaveFileDialog();
+
+            saveFileDialog1.FileName = filename;
+            saveFileDialog1.Filter = "PackDev project files (*.pd)|*.pd|All files (*.*)|*.*";
+            saveFileDialog1.RestoreDirectory = true;
+
+            if (saveFileDialog1.ShowDialog() == DialogResult.OK)
+            {
+                filename = saveFileDialog1.FileName;
+            }
+            PackSaverLoader.Save(_pack, filename);
         }
     }
 }

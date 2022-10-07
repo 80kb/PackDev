@@ -68,6 +68,20 @@ namespace PackDevNET
         // Returns the nintendo track mode
         public int NinTrackMode { get { return this._ninTrackMode; } }
 
+        // Return the pack's name
+        public string Name { get { return this._name; } }
+
+        // Returns the Speedometer Level
+        public int SomLevel { get { return _som; }  }
+
+        // Returns true if the Performance Monitor is enabled
+        public bool PerfMonEnabled { get { return _perfMon; } }
+
+        // Returns true if 200cc is enabled
+        public bool MoreCC { get { return _200cc; } }
+        
+        // Returns true if CT Time Trials is enabled
+        public bool CTTimeTrialsEnabled { get { return _ctTimeTrial; } }
 
 
         // Sets _ninTrackMode
@@ -813,6 +827,12 @@ namespace PackDevNET
             Cup newCup = new Cup();
             newCup.SetName(name);
             this._cups.Add(newCup); 
+        }
+
+        // Adds a predefined cup to the projects
+        public void AddCup(Cup c)
+        {
+            this._cups.Add(c);
         }
 
         // Removes given cup from the list
