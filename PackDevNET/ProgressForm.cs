@@ -18,9 +18,15 @@ namespace PackDevNET
             this._bw = bw;
         }
 
+        public void UpdateProgress(int percentCompelete)
+        {
+            progressStepLabel.Text = $"{percentCompelete}% Complete";
+            progressBar.Value = percentCompelete;
+        }
+
         public void UpdateProgress(int percentCompelete, string message)
         {
-            progressStepLabel.Text = $"Exporting: {percentCompelete}%    {message}";
+            progressStepLabel.Text = $"{percentCompelete}% {message}";
             progressBar.Value = percentCompelete;
         }
 
