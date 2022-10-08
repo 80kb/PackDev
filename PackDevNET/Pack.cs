@@ -21,7 +21,13 @@ namespace PackDevNET
         private bool _perfMon;
         private CTDEF _ctDef;
         private string _name;
+
+        // 0 = None
+        // 1 = Hide
+        // 2 = Show
+        // 3 = Swap
         private int _ninTrackMode;
+
         private int _som;
 
         // Initialize with default values
@@ -735,7 +741,26 @@ namespace PackDevNET
         // path: path to image output as a .tpl
         public void CreateCupImages(string path)
         {
-            Image outputImage = _ninTrackMode <= 1 ? Properties.Resources.ct_icons_none : Properties.Resources.ct_icons;
+            Image outputImage = Properties.Resources.ct_icons;
+
+            switch (_ninTrackMode)
+            {
+                case 0: // None
+                    outputImage = Properties.Resources.ct_icons_none;
+                    break;
+                case 1: // Hide
+                    outputImage = Properties.Resources.ct_icons_none;
+                    break;
+                case 2: // Show
+                    outputImage = Properties.Resources.ct_icons_show;
+                    break;
+                case 3: // Swap
+                    outputImage = Properties.Resources.ct_icons;
+                    break;
+            }
+
+            if (_ninTrackMode <= 1)
+                outputImage = Properties.Resources.ct_icons_none;
 
             if (_wiimmCup)
             {

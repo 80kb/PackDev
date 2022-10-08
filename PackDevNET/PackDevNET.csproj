@@ -159,6 +159,7 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="icon.ico" />
+    <None Include="Resources\ct_icons-show.png" />
     <None Include="Resources\all.bmg.txt" />
   </ItemGroup>
   <ItemGroup>

@@ -135,6 +135,16 @@ namespace PackDevNET.Properties {
         }
         
         /// <summary>
+        ///   Looks up a localized resource of type System.Drawing.Bitmap.
+        /// </summary>
+        internal static System.Drawing.Bitmap ct_icons_show {
+            get {
+                object obj = ResourceManager.GetObject("ct_icons_show", resourceCulture);
+                return ((System.Drawing.Bitmap)(obj));
+            }
+        }
+        
+        /// <summary>
         ///   Looks up a localized resource of type System.Byte[].
         /// </summary>
         internal static byte[] cup_icon_64x64_common {
