@@ -555,11 +555,7 @@ namespace PackDevNET
 
         private void somComboBox_SelectedIndexChanged(object sender, EventArgs e)
         {
-            _pack.SetSom(somComboBox.SelectedIndex);
-            if (somComboBox.SelectedIndex < 0)
-            {
-                _pack.SetSom(somComboBox.SelectedIndex + 1);
-            }
+            _pack.SetSom(somComboBox.SelectedIndex + 1);
         }
 
         private void openToolStripMenuItem_Click(object sender, EventArgs e)

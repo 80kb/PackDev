@@ -13,10 +13,6 @@ namespace PackDevNET
 {
     public class Pack
     {
-        private BackgroundWorker _bw;
-        private int _bwCompletion;
-        private string _bwMessage;
-
         private List<Cup> _cups;
         private bool _flags;
         private bool _wiimmCup;
@@ -31,10 +27,6 @@ namespace PackDevNET
         // Initialize with default values
         public Pack()
         {
-            this._bw = new BackgroundWorker();
-            this._bwCompletion = 0;
-            this._bwMessage = "";
-
             this._cups = new List<Cup>();
             this._wiimmCup = false;
             this._flags = true;
@@ -149,14 +141,11 @@ namespace PackDevNET
         }
 
         // Exports as riivolution pack
-        private async void ExportRiivHelper(string path, string image)
+        private async void ExportRiivHelper(string path, string image, BackgroundWorker bw)
         {
 
             // wit X '.\Mario Kart Wii (USA).iso' --psel DATA -D '.\Mario Kart Wii (USA).d'
-
-            this._bwMessage = "Extracting image file";
-            this._bwCompletion += 0;
-            this._bw.ReportProgress(0);
+            bw.ReportProgress(0);
 
             // 1. Extract image file
             //-----------------------
@@ -176,9 +165,8 @@ namespace PackDevNET
                 throw new Exception("Image file is either in an unrecognized format or invalid");
             }
 
-            this._bwMessage = "Creating SD-Card directories";
-            this._bwCompletion += 30;
-            this._bw.ReportProgress(30);
+            bw.ReportProgress(30);
+            if (bw.CancellationPending) return;
 
 
 
@@ -193,9 +181,8 @@ namespace PackDevNET
             string riivDir = Path.Combine(sdRoot, "riivolution");
             Directory.CreateDirectory(riivDir);
 
-            this._bwMessage = "Saving CT-DEF.txt";
-            this._bwCompletion += 5;
-            this._bw.ReportProgress(5);
+            bw.ReportProgress(35);
+            if (bw.CancellationPending) return;
 
 
 
@@ -203,9 +190,8 @@ namespace PackDevNET
             //------------------------------------------
             string ctdef = CTDEF.Save(patchDir);
 
-            this._bwMessage = "Patching menu files";
-            this._bwCompletion += 5;
-            this._bw.ReportProgress(5);
+            bw.ReportProgress(40);
+            if (bw.CancellationPending) return;
 
 
 
@@ -221,14 +207,13 @@ namespace PackDevNET
             // Patch menu files
             string originalUIDir = Path.Combine(packdevWorkingDir, "files", "Scene", "UI");
 
-            PatchMenuFiles(originalUIDir, uiDir);
+            PatchMenuFiles(originalUIDir, uiDir, bw);
 
             // Create and patch BMG files
             CreateBMGFiles(originalUIDir, ctdef, uiDir);
 
-            this._bwMessage = "Creating REL directory";
-            this._bwCompletion += 20;
-            this._bw.ReportProgress(20);
+            bw.ReportProgress(60);
+            if (bw.CancellationPending) return;
 
 
 
@@ -248,9 +233,8 @@ namespace PackDevNET
             // Patch le-code config file
             PatchLECODEConfig(lecodeBin);
 
-            this._bwMessage = "Patching tracks";
-            this._bwCompletion += 10;
-            this._bw.ReportProgress(10);
+            bw.ReportProgress(70);
+            if (bw.CancellationPending) return;
 
 
 
@@ -306,9 +290,8 @@ namespace PackDevNET
                 }
             }
 
-            this._bwMessage = "Creating SYS directory";
-            this._bwCompletion += 20;
-            this._bw.ReportProgress(20);
+            bw.ReportProgress(90);
+            if (bw.CancellationPending) return;
 
 
 
@@ -324,9 +307,8 @@ namespace PackDevNET
             // Patch main.dol
             PatchMainDol(Path.Combine(sysDir, "main.dol"));
 
-            this._bwMessage = "Writing XML";
-            this._bwCompletion += 5;
-            this._bw.ReportProgress(5);
+            bw.ReportProgress(95);
+            if (bw.CancellationPending) return;
 
 
 
@@ -335,8 +317,7 @@ namespace PackDevNET
             string xml = Path.Combine(riivDir, $"{FormatName()}.xml");
             WriteRiivXML(xml, courseDir, uiDir, Path.GetFileName(lecodeBin), GetImageID(image));
 
-            this._bwCompletion = 0;
-            this._bw.ReportProgress(5);
+            bw.ReportProgress(100);
         }
 
 
@@ -488,8 +469,10 @@ namespace PackDevNET
         //
         // path:    path to folder containing menu files
         // output:  path to output folder
-        public void PatchMenuFiles(string path, string output)
+        public void PatchMenuFiles(string path, string output, BackgroundWorker bw)
         {
+            int currentProgress = 40;
+
             string[] files = new string[] {
                 "Channel.szs",
                 "Event.szs",
@@ -552,6 +535,9 @@ namespace PackDevNET
                     File.WriteAllBytes(Path.Combine(dynamicDir, "demo", "timg", "tt_hatena_64x64.tpl.brlyt"), Properties.Resources.course_name);
                 }
 
+                //Progress after replacing files
+                bw.ReportProgress(currentProgress++);
+
                 // Cup Images
                 if (Path.GetFileNameWithoutExtension(file) == "MenuMulti" || Path.GetFileNameWithoutExtension(file) == "MenuSingle")
                 {
@@ -577,6 +563,8 @@ namespace PackDevNET
                 }
 
                 WiimmCommand("WSZST", $"CREATE \"{dynamicDir}\" -D \"{outputFile}\" -o");
+
+                bw.ReportProgress(currentProgress++);
 
                 //Directory.Delete(dynamicDir, true);
             }
@@ -818,7 +806,7 @@ namespace PackDevNET
             argument.Append($"--speedometer={somString} ");
 
             WiimmCommand("WLECT", argument.ToString());
-
+            Console.WriteLine(argument);
         }
 
         // Adds a single new cup to the projects
@@ -907,17 +895,23 @@ namespace PackDevNET
         // image:   path to image file
         public void ExportRiiv(string path, string image)
         {
-            ProgressForm pf = new ProgressForm(this._bw, "Exporting riivolution pack...");
+            BackgroundWorker bw = new BackgroundWorker();
+
+            ProgressForm pf = new ProgressForm(bw, "Exporting riivolution pack...");
             pf.Show();
 
-            this._bw.WorkerSupportsCancellation = true;
-            this._bw.WorkerReportsProgress = true;
+            bw.WorkerSupportsCancellation = true;
+            bw.WorkerReportsProgress = true;
 
-            this._bw.DoWork += (sender, e) => ExportRiivHelper(path, image);
-            this._bw.ProgressChanged += (sender, e) => pf.UpdateProgress(this._bwCompletion, this._bwMessage);
-            this._bw.RunWorkerCompleted += (sender, e) => pf.UpdateProgress(100, "Export Completed!");
+            bw.DoWork += (sender, e) => ExportRiivHelper(path, image, bw);
+            bw.ProgressChanged += (sender, e) => pf.UpdateProgress(e.ProgressPercentage);
+            bw.RunWorkerCompleted += (sender, e) =>
+            {
+                pf.UpdateProgress(100, "Export Completed!");
+                bw.Dispose();
+            };
 
-            this._bw.RunWorkerAsync();
+            bw.RunWorkerAsync();
         }
     }
 }
